@@ -17,7 +17,6 @@ class UserProfile(models.Model):
         return "%s : %s %s" % (self.user.username , self.user.first_name, self.user.last_name)
 
 
-
 #custom
 def create_profile(sender, **kwargs):
     if kwargs['created']:
