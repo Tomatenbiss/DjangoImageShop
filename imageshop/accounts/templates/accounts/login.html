@@ -1,0 +1,23 @@
+	
+	
+	{% extends 'base.html' %}
+
+	{% block head %}
+	<title>Loslegen</title>
+	{% endblock %}
+
+	{% block body %}
+	<div class="container">
+
+		<h1>Login:</h1>
+		<p>just do it!</p>
+		<h2>Login</h2>
+		<form method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit">Login</button>
+		</form>
+		
+	</div>
+	{% endblock %}
+
