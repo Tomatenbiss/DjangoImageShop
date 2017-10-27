@@ -14,13 +14,13 @@ def index(request):
 def signup(request):
 	if request.method == 'POST':
 		form = UserCreationForm(request.POST)
-		if form.isvalid():
+		if form.is_valid():
 			form.save()
 			username = form.cleaned_data.get('username')
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username=username, password=raw_password)
-			logn(request,user)
-			return redirect('home')
+			login(request,user)
+			return redirect('index')
 	else:
 		form = UserCreationForm()
 	return render(request, 'signup.html', {'form':form})
