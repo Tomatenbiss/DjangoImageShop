@@ -3,7 +3,7 @@
 <h2>Set up the virtual environment</h2>
 First you need to have virtualenv installed: 
 
-`pip install virtualenv
+`pip install virtualenv`
 
 Go to your project folder and setup a new virtual environment.
 
@@ -24,4 +24,4 @@ Make sure your .gitignore file contains: `env/`
 
 Run the server.
 
-`python imageshop/manage.py runserver`
+`python imageshop/manage.py runserver
