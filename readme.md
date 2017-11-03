@@ -21,3 +21,7 @@ Install Django: `pip install django`
 The current version is 1.11.7
 
 Make sure your .gitignore file contains: `env/`
+
+Run the server.
+
+`python imageshop/manage.py runserver`
