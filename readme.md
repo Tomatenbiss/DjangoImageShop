@@ -13,10 +13,6 @@ Next, activate the environment by typing: `source env/bin/activate`
 
 You can deactivate it any time by typing: `deactivate`
 
-Now you are ready to install python 3.6.
-
-`brew install python3`
-
 Install Requirements: `pip install -r requirements.txt`
 
 Make sure your .gitignore file contains: `env/`
