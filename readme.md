@@ -7,7 +7,7 @@ First you need to have virtualenv installed:
 
 Go to your project folder and setup a new virtual environment.
 
-`virtualenv env`
+`virtualenv -p python3 env`
 
 Next, activate the environment by typing: `source env/bin/activate`
 
