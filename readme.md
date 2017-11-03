@@ -17,8 +17,7 @@ Now you are ready to install python 3.6.
 
 `brew install python3`
 
-Install Django: `pip install django`
-The current version is 1.11.7
+Install Requirements: `pip install -r requirements.txt`
 
 Make sure your .gitignore file contains: `env/`
 
