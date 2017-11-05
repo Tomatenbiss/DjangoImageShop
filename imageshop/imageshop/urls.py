@@ -15,10 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
-from development.views import start_view
+from development.views import start_view, login, registration
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', start_view),
+    url(r'^login$', login),
+    url(r'^registration$', registration),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
