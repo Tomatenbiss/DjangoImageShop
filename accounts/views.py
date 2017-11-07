@@ -8,14 +8,14 @@ from django.shortcuts import render
 
 def start_view(request):
     context = {}
-    return render(request, 'development/landingpage.html', context)
+    return render(request, 'accounts/landingpage.html', context)
 
 
 def registration(request):
     context = {}
-    return render(request, 'development/registration.html', context)
+    return render(request, 'accounts/registration.html', context)
 
 
 def login(request):
     context = {}
-    return render(request, 'development/login.html', context)
+    return render(request, 'accounts/login.html', context)
