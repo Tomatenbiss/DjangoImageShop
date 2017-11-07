@@ -1,28 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="card">
-        <div class="card-header">
-            <h2>Registration</h2>
-        </div>
-        <div class="card-body">
-            <form>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email">
-                    <small id="email" class="form-text text-muted">Your email will never be shared with anyone!</small>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password check</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password check">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-    </div>
+	<div class="card">
+		<div class="card-header">
+			<h2>Registration</h2>
+		</div>
+		<div class="card-body">
+			<form method="post">
+					{% csrf_token %}
+					{% for field in form %}
+					<div class="form-group">
+						{{ field.label_tag }}<br>
+						{{ field }}
+						{% if field.help_text %}
+						<small style="color: grey">{{ field.help_text }}</small>
+						{% endif %}
+						{% for error in field.errors %}
+						<p style="color: red">{{ error }}</p>
+						{% endfor %}
+					</div>
+				    {% endfor %}
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
 
 {% endblock %}
