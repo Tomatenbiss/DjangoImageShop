@@ -21,7 +21,16 @@
                         <a class="nav-link" href="#">Shops</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="accounts/profile">Profile</a>
+                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}">logout</a>
+                        {% else %}
+                        <a href="{% url 'login_view' %}">login</a> / <a href="{% url 'registration' %}">registration</a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>

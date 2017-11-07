@@ -23,7 +23,7 @@ from accounts import urls as accounts_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', start_view),
+    url(r'^$', start_view, name='start_view'),
     url(r'^accounts/', include(accounts_urls)),
 ]
 
