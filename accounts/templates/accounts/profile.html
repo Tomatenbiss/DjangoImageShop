@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load staticfiles %}
+    <div class="container">
+	<div class="row">
+		<div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    My Profile
+                </div>
+                <div class="avatar">
+                    <img alt="" src="http://astrologie-momentmal.de/wp-content/uploads/testimonails/mustermann476333.jpg">
+                </div>
+                <div class="info">
+                    <div class="title profile-name">
+                        <a target="_blank" href="#">Max Mustermann</a>
+                    </div>
+                    <div class="desc"> Email: max@mustermann.com</div>
+                    <div class="desc"> Age: 25</div>
+                    <div class="desc"> Interests: Photography, Painting, Tennis</div>
+                    <div class="desc"> Rated: 4.2 </div>
+                </div>
+                <div class="bottom">
+                    <a class="btn btn-primary btn-twitter btn-sm" href="#">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a class="btn btn-primary btn-sm" rel="publisher"
+                       href="#">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+	</div>
+</div>
+
+{% endblock %}

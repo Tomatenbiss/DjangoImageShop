@@ -19,3 +19,8 @@ def registration(request):
 def login(request):
     context = {}
     return render(request, 'accounts/login.html', context)
+
+
+def profile(request):
+    context = {}
+    return render(request, 'accounts/profile.html', context)
