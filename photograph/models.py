@@ -17,3 +17,5 @@ class Photo(models.Model):
     created = models.DateTimeField(auto_now_add=True,editable=False)
     #Titel
     title = models.CharField(max_length=20)
+    #sichtbar
+    public = False
