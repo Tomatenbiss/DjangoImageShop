@@ -7,19 +7,22 @@
 		</div>
 		<div class="card-body">
 			<form method="post">
-					{% csrf_token %}
-					{% for field in form %}
-					<div class="form-group">
-						{{ field.label_tag }}<br>
-						{{ field }}
-						{% if field.help_text %}
-						<small style="color: grey">{{ field.help_text }}</small>
-						{% endif %}
-						{% for error in field.errors %}
-						<p style="color: red">{{ error }}</p>
-						{% endfor %}
-					</div>
-				    {% endfor %}
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="color: grey">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <label for="photographCheckbox">I am a Photograph   </label>
+                <input type="checkbox" name="photographCheckbox">
+                <br>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>
