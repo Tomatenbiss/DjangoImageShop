@@ -10,7 +10,7 @@ class Photo(models.Model):
     #schonmal ne Liste fuer die Kategorien spaeter
     tags        = []
     #Besitzer 1:M
-    owner = models.ForeignKey(models.User)
+    owner = models.ForeignKey(User)
     #modifiziert
     last_modified = models.DateTimeField(auto_now_add=True,editable=False)
     #upload
@@ -19,3 +19,6 @@ class Photo(models.Model):
     title = models.CharField(max_length=20)
     #sichtbar
     public = False
+    def __str__(self):
+        return "%s : %s" % (self.title, self.owner)
+
