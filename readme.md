@@ -19,4 +19,4 @@ Make sure your .gitignore file contains: `env/`
 
 Run the server.
 
-`python imageshop/manage.py runserver`
+`python manage.py runserver`
