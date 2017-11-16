@@ -20,11 +20,13 @@ from django.conf.urls.static import static
 
 from accounts.views import start_view
 from accounts import urls as accounts_urls
+from photo import urls as photo_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', start_view, name='start_view'),
     url(r'^accounts/', include(accounts_urls)),
+    url(r'^photo/', include(photo_urls)),
 ]
 
 if settings.DEBUG:
