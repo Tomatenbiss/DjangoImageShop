@@ -25,7 +25,7 @@ SECRET_KEY = '84+u1-=(42v!_198^%@6l83h9j=m9w&m1wd7fl28*)dl$@ga1i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -126,3 +126,5 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
+
+DATE_INPUT_FORMATS = ('%d-%m-%Y')
