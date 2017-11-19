@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="row">
+        <div class="card">
+            <p class="card-text">Titel: {{ photo.title }}</p>
+            <p class="muted">Fotograf: {{ photo.owner }}</p>
+            <p>Hochgeladen: {{ photo.created }} </p>
+            <p>Zuletzt geändert: {{ photo.last_modified }}</p>
+            <img src="{{ photo.image.url }}" />
+        </div>
+    </div>
+
+{% endblock %}
