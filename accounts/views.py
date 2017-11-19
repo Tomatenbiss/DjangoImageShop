@@ -33,7 +33,7 @@ def registration(request):
            # if request.POST["is_photographer"]:
             is_photographer = request.POST.get('is_photographer', False)
             if is_photographer:
-            	user.groups.add(Group.objects.get(name='photographer'))
+                user.groups.add(Group.objects.get(name='photographer'))
             else:
                 user.groups.add(Group.objects.get(name='customer'))
             user.refresh_from_db()  # load the profile instance created by the signal
