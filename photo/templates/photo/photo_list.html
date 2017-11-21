@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for photo in object_list %}
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" alt="" width="200" height="100" src="{{ photo.image.url }}">
+                        <div class="info">
+                            <div class="title" style="margin-left: 10px">
+                                <a href="{% url 'view' photo.id %}">{{ photo.title }}</a>
+                            </div>
+                            <div class="desc">Photograph: {{ photo.owner }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
