@@ -14,6 +14,7 @@
                     <p>Fotograf: {{ photo.owner.first_name }} {{ photo.owner.last_name }}</p>
                     <p>Beschreibung: {{ photo.description }}</p>
                     <p>Hochgeladen: {{ photo.created }}</p>
+                    <p>Öffentlich sichtbar: {{ photo.public }}</p>
                     <p>Zuletzt geändert: {{ photo.last_modified }}</p>
                     {% if photo.owner == user %}
                     <a class="btn btn-primary" role="button" href="{% url 'update' photo.pk %}">Bearbeiten</a>
