@@ -16,10 +16,9 @@ class viewAllPhotos(ListView):
     model = Photo
     template_name = 'photo/photo_list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(viewAllPhotos, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
+    def get_queryset(self):
+        '''Only retrieve photos who are visible'''
+        return Photo.objects.filter(public=True)
 
 
 class createPhoto(LoginRequiredMixin, CreateView):
