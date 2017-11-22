@@ -20,18 +20,26 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Shops</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'logout' %}">logout</a>
-                        {% else %}
-                        <a href="{% url 'login_view' %}">login</a> / <a href="{% url 'registration' %}">registration</a>
-                        {% endif %}
+                        <a class="nav-link" href="{% url 'profile' %}">{{ user.first_name }} {{user.last_name}}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">   
+                        <a class="nav-link" href="{% url 'login_view' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
