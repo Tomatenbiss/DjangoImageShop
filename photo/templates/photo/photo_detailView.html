@@ -2,12 +2,24 @@
 {% block content %}
 
     <div class="row">
-        <div class="card">
-            <p class="card-text">Titel: {{ photo.title }}</p>
-            <p class="muted">Fotograf: {{ photo.owner }}</p>
-            <p>Hochgeladen: {{ photo.created }} </p>
-            <p>Zuletzt geändert: {{ photo.last_modified }}</p>
-            <img src="{{ photo.image.url }}" />
+        <div class="col-8">
+            <div class="card mb-3">
+                <img class="card-img-top" src="{{ photo.image.url }}" alt="{{ photo.title }}">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card border-dark mb-3">
+                <div class="card-body">
+                    <h4 class="card-title">{{ photo.title }}</h4>
+                    <p>Fotograf: {{ photo.owner.first_name }} {{ photo.owner.last_name }}</p>
+                    <p>Beschreibung: {{ photo.description }}</p>
+                    <p>Hochgeladen: {{ photo.created }}</p>
+                    <p>Zuletzt geändert: {{ photo.last_modified }}</p>
+                    {% if photo.owner == user %}
+                    <a class="btn btn-primary" role="button" href="{% url 'update' photo.pk %}">Bearbeiten</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 
