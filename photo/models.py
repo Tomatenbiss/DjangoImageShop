@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class Photo(models.Model):
     #Bild aus Datei
@@ -19,9 +20,16 @@ class Photo(models.Model):
     title = models.CharField(max_length=20)
     #sichtbar
     public = models.BooleanField(default=False)
-    
+    #Preis
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+
     def __str__(self):
         return "%s : %s" % (self.title, self.owner)
+
+    def clean(self):
+        # price has to be set as soon as the public attribute is true
+        if self.public and self.price == 0.00:
+            raise ValidationError({'price': 'Der Preis muss gesetzt werden, wenn das Bild öffentlich sein soll.'})
 
     def get_absolute_url(self):
         return reverse('view', kwargs={'pk': self.pk})

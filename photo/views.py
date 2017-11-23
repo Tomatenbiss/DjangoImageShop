@@ -23,7 +23,7 @@ class viewAllPhotos(ListView):
 
 class createPhoto(LoginRequiredMixin, CreateView):
     model = Photo
-    fields = ['title', 'description', 'image', 'public']
+    fields = ['title', 'description', 'image', 'public', 'price']
     template_name = 'photo/photo_form.html'
 
     def form_valid(self, form):
@@ -35,7 +35,7 @@ class createPhoto(LoginRequiredMixin, CreateView):
 
 class updatePhoto(LoginRequiredMixin, UpdateView):
     model = Photo
-    fields = ['title', 'description', 'public']
+    fields = ['title', 'description', 'price', 'public']
     template_name = 'photo/photo_form.html'
 
     def form_valid(self, form):
