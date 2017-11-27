@@ -1,5 +1,5 @@
-from django.db import models
-from photograph.models import Photo
+from django.db          import models
+from photo.models       import Photo
 # Create your models here.
 
 class Photoseries(models.Model):
@@ -7,6 +7,6 @@ class Photoseries(models.Model):
     describtion = models.CharField(max_length=100)
     images      = models.ManyToManyField(Photo)
     tags        = []
-    #owner      = models.ForeignKey(User)
+    owner      = models.ForeignKey('accounts.Photographer', verbose_name='Fotograf')
 
     

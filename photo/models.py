@@ -1,7 +1,8 @@
-from django.urls import reverse
-from django.db import models
-from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
+from django.urls    import reverse
+from django.db      import models
+from django.contrib.auth.models     import User
+#from accounts.models import Profile, Photographer
+from django.core.exceptions     import ValidationError
 
 class Photo(models.Model):
     #Bild aus Datei
@@ -11,10 +12,11 @@ class Photo(models.Model):
     #schonmal ne Liste fuer die Kategorien spaeter
     tags        = []
     #Besitzer 1:M
-    owner = models.ForeignKey(User)
+    owner = models.ForeignKey('accounts.Photographer')
     #modifiziert
     last_modified = models.DateTimeField(auto_now_add=True,editable=False)
-    #upload
+    #uploadclass Photo(models.Model):
+
     created = models.DateTimeField(auto_now_add=True,editable=False)
     #Titel
     title = models.CharField(max_length=20)

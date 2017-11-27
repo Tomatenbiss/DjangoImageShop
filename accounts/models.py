@@ -28,3 +28,10 @@ def age(self):
 #def calculate_age(born):
 #    today = date.today()
 #    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
+
+class Photographer(Profile):
+    profile = models.OneToOneField(Profile)
+    # gibt noch keine shops
+    # shop = OneToOneField(shop)
+    
