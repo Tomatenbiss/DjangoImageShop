@@ -17,7 +17,7 @@
                                 <a target="_blank" href="#">{{ request.user.first_name }} {{ request.user.last_name }}</a>
                             </div>
                             <div class="desc"> Email: {{ request.user.email }}</div>
-                            <div class="desc"> Age: {{ request.user.profile.birth_date }} {{ request.user.profile.age }} {{ request.user.age }}</div>
+                            <div class="desc"> Age: {{ request.user.profile.calculate_age }}</div>
                             <div class="desc"> Interests: Photography, Painting, Tennis</div>
                             <div class="desc"> Rated: 4.2 </div>
                         </div>
