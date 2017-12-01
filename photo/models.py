@@ -29,6 +29,8 @@ class Photo(models.Model):
         return "%s : %s" % (self.title, self.owner)
 
     def clean(self):
+        if self.price < 0.00:
+            raise ValidationError({'price': 'Der Preis darf nicht negativ sein.'})
         # price has to be set as soon as the public attribute is true
         if self.public and self.price == 0.00:
             raise ValidationError({'price': 'Der Preis muss gesetzt werden, wenn das Bild öffentlich sein soll.'})
