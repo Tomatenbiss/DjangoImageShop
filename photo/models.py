@@ -13,6 +13,8 @@ class Photo(models.Model):
     tags        = []
     #Besitzer 1:M
     owner = models.ForeignKey('accounts.Photographer')
+    #Kategorie M:N
+    #categories = models.ManyToManyField('PhotoCategory')
     #modifiziert
     last_modified = models.DateTimeField(auto_now_add=True,editable=False)
     #uploadclass Photo(models.Model):
@@ -37,3 +39,10 @@ class Photo(models.Model):
 
     def get_absolute_url(self):
         return reverse('view', kwargs={'pk': self.pk})
+
+class PhotoCategory(models.Model):
+    #Name der Kategorie
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return "%s" % (self.name)
