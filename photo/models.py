@@ -46,3 +46,11 @@ class PhotoCategory(models.Model):
 
     def __str__(self):
         return "%s" % (self.name)
+
+    def clean(self):
+        # this works because empty sequences are false
+        if PhotoCategory.objects.filter(name=self.name):
+            raise ValidationError({'name': 'Diese Kategorie existiert bereits.'})
+
+    def get_absolute_url(self):
+        return reverse('categories')

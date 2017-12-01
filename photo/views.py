@@ -4,7 +4,17 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.utils import timezone
-from .models import Photo
+from .models import Photo, PhotoCategory
+
+class categoryView(CreateView):
+    model = PhotoCategory
+    fields = ['name']
+    template_name = 'photo/categories.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(categoryView, self).get_context_data(**kwargs)
+        context['categories'] = PhotoCategory.objects.filter();
+        return context
 
 
 class viewPhoto(DetailView):
