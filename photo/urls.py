@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^view/$', viewAllPhotos.as_view(), name='viewAll'),
     url(r'^add/$', createPhoto.as_view(), name='upload'),
     url(r'^edit/(?P<pk>[0-9]+)/$', updatePhoto.as_view(), name='update'),
+    url(r'^categories/add/$', categoryView.as_view(), name='category_add'),
     # temporary view for categories
     url(r'^categories/$', categoryView.as_view(), name='categories')
 ]

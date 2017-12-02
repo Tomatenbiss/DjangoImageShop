@@ -5,8 +5,32 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.utils import timezone
 from .models import Photo, PhotoCategory
+from django.http.response import JsonResponse
 
-class categoryView(CreateView):
+class AjaxableResponseMixin(object):
+    """
+    Mixin to add AJAX support to a form.
+    Must be used with an object-based FormView (e.g. CreateView)
+    """
+    def form_invalid(self, form):
+        response = super(AjaxableResponseMixin, self).form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
+    def form_valid(self, form):
+        response = super(AjaxableResponseMixin, self).form_valid(form)
+        if self.request.is_ajax():
+            data = {
+                # BAD - this works only for categories
+                'name': form.instance.name,
+            }
+            return JsonResponse(data, status=200)
+        else:
+            return response
+
+class categoryView(AjaxableResponseMixin, CreateView):
     model = PhotoCategory
     fields = ['name']
     template_name = 'photo/categories.html'
