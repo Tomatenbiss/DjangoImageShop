@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'shop',
     'shoppingcart',
     'photo',
-    'photoseries'
+    'photoseries',
+    'carton'
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,5 @@ DATE_INPUT_FORMATS = ('%d-%m-%Y')
 
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+
+CART_PRODUCT_MODEL = 'photo.models.Photo'
