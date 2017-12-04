@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'shoppingcart',
     'photo',
     'photoseries',
-    'carton'
+    'carton',
+    'imagefit'
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,4 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 CART_PRODUCT_MODEL = 'photo.models.Photo'
+
