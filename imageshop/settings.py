@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'shop',
-    'photo'
+    'photo',
+    'photoseries',
+    'shoppingcart',
 ]
 
 MIDDLEWARE = [
@@ -134,4 +136,4 @@ DATE_INPUT_FORMATS = ('%d-%m-%Y')
 # https://docs.djangoproject.com/en/1.11/howto/static-files/ && https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-MEDIA_ROOT
 
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
