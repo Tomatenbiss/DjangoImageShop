@@ -9,4 +9,7 @@ class Photoseries(models.Model):
     tags        = []
     owner      = models.ForeignKey('accounts.Photographer', verbose_name='Fotograf')
 
+    def __str__(self):
+        return (self.owner.profile.name + " : " + self.title)
+
     
