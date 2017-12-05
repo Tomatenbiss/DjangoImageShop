@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^$', start_view, name='start_view'),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^photo/', include(photo_urls)),
-    url(r'^shoppingcart/', include(shoppingcart_urls)),
+    url(r'^shoppingcart/', include(shoppingcart_urls, namespace='shoppingcart')),
     url(r'^imagefit/', include(imagefit_urls)),
 ]
 
