@@ -17,5 +17,10 @@ def remove(request):
     cart.remove(phot)
     return HttpResponse("Removed")
 
+def clear(request):
+    cart = Cart(request.session)
+    cart.clear()
+    return HttpResponse("Cleared")
+
 def show(request):
     return render(request, 'shoppingcart/show-cart.html')
