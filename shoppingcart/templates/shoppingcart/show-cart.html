@@ -2,35 +2,34 @@
 {% load carton_tags %}
 {% block content %}
 
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-header">Shopping Cart</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="card-header">Shopping Cart</div>
 
-{% get_cart as cart %}
-
-    <table border="1">
-    <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
-    </tr>
-    {% for item in cart.items %}
-    <tr>
-        <td>{{ item.product }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>{{ item.subtotal }}</td>
-    </tr>
-        {% endfor %}
-    </table>
-
-    Total: {{ cart.total }}
-    <a class="btn btn-primary" role="button" href="{% url 'shoppingcart:clear' %}">Empty</a>
-
-                    </div>
+                    {% get_cart as cart %}
+                        {% if cart.total > 0 %}
+                            <table border="1">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                                {% for item in cart.items %}
+                                    <tr>
+                                        <td>{{ item.product }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>{{ item.subtotal }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                        Total: {{ cart.total }}
+                        <a class="btn btn-primary" role="button" href="{% url 'shoppingcart:clear' %}">Empty</a>
                 </div>
             </div>
         </div>
+    </div>
 {% endblock %}
 
