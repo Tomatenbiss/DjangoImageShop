@@ -21,12 +21,16 @@ from django.conf.urls.static import static
 from accounts.views import start_view
 from accounts import urls as accounts_urls
 from photo import urls as photo_urls
+from shoppingcart import urls as shoppingcart_urls
+from imagefit import urls as imagefit_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', start_view, name='start_view'),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^photo/', include(photo_urls)),
+    url(r'^shoppingcart/', include(shoppingcart_urls)),
+    url(r'^imagefit/', include(imagefit_urls)),
 ]
 
 if settings.DEBUG:

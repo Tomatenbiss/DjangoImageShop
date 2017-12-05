@@ -12,7 +12,9 @@ class Photo(models.Model):
     #schonmal ne Liste fuer die Kategorien spaeter
     tags        = []
     #Besitzer 1:M
-    owner = models.ForeignKey('accounts.Photographer')
+    owner = models.ForeignKey(User)
+    #Kategorie M:N
+    #categories = models.ManyToManyField('PhotoCategory')
     #modifiziert
     last_modified = models.DateTimeField(auto_now_add=True,editable=False)
     #uploadclass Photo(models.Model):
@@ -29,9 +31,26 @@ class Photo(models.Model):
         return "%s : %s" % (self.title, self.owner)
 
     def clean(self):
+        if self.price < 0.00:
+            raise ValidationError({'price': 'Der Preis darf nicht negativ sein.'})
         # price has to be set as soon as the public attribute is true
         if self.public and self.price == 0.00:
             raise ValidationError({'price': 'Der Preis muss gesetzt werden, wenn das Bild öffentlich sein soll.'})
 
     def get_absolute_url(self):
         return reverse('view', kwargs={'pk': self.pk})
+
+class PhotoCategory(models.Model):
+    #Name der Kategorie
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return "%s" % (self.name)
+
+    def clean(self):
+        # this works because empty sequences are false
+        if PhotoCategory.objects.filter(name=self.name):
+            raise ValidationError({'name': 'Diese Kategorie existiert bereits.'})
+
+    def get_absolute_url(self):
+        return reverse('categories')

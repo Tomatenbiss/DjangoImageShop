@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'shop',
+    'shoppingcart',
     'photo',
     'photoseries',
-    'shoppingcart',
+    'carton',
+    'imagefit'
 ]
 
 MIDDLEWARE = [
@@ -137,3 +139,6 @@ DATE_INPUT_FORMATS = ('%d-%m-%Y')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+
+CART_PRODUCT_MODEL = 'photo.models.Photo'
+
