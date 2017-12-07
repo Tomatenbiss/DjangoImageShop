@@ -32,10 +32,10 @@ class Photo(models.Model):
 
     def clean(self):
         if self.price < 0.00:
-            raise ValidationError({'price': 'Der Preis darf nicht negativ sein.'})
+            raise ValidationError({'price': 'The price can\'t be negative.'})
         # price has to be set as soon as the public attribute is true
         if self.public and self.price == 0.00:
-            raise ValidationError({'price': 'Der Preis muss gesetzt werden, wenn das Bild öffentlich sein soll.'})
+            raise ValidationError({'price': 'The price has to be set, if you want to set the picture publicy visible.'})
 
     def get_absolute_url(self):
         return reverse('view', kwargs={'pk': self.pk})
@@ -50,7 +50,7 @@ class PhotoCategory(models.Model):
     def clean(self):
         # this works because empty sequences are false
         if PhotoCategory.objects.filter(name=self.name):
-            raise ValidationError({'name': 'Diese Kategorie existiert bereits.'})
+            raise ValidationError({'name': 'This category already exists.'})
 
     def get_absolute_url(self):
         return reverse('categories')
