@@ -6,9 +6,11 @@
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="card">
-                    <div class="card-header">Shopping Cart</div>
-
                     {% get_cart as cart %}
+                        <div class="card-header">
+                            Shopping Cart
+                            <span class="badge badge-pill light-blue" style="float:right; margin-top: 4px">{{ cart.total }}</span>
+                        </div>
                         {% if cart.total > 0 %}
                             <table border="1">
                                 <tr>
@@ -25,7 +27,6 @@
                                 {% endfor %}
                             </table>
                         {% endif %}
-                        Total: {{ cart.total }}
                         <a class="btn btn-primary" role="button" href="{% url 'shoppingcart:clear' %}">Empty</a>
                 </div>
             </div>
