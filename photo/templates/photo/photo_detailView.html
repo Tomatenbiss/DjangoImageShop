@@ -21,6 +21,7 @@
                     <p>Last updated: {{ photo.last_modified }}</p>
                     <p>Public: {{ photo.public }}</p>
                     <a class="btn btn-primary" role="button" href="{% url 'update' photo.pk %}">Edit</a>
+                    <a class="btn btn-danger" role="button" href="{% url 'delete' photo.pk %}">Delete</a>
                     {% endif %}
                     {% if user.groups.all.0|stringformat:"s" == "customer" %}
                     <a class="btn btn-primary" role="button" href="{% url 'shoppingcart:add' %}?id={{ photo.id }}">Buy</a>

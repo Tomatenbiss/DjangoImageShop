@@ -1,6 +1,6 @@
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.utils import timezone
@@ -77,3 +77,12 @@ class updatePhoto(LoginRequiredMixin, UpdateView):
             raise PermissionDenied
         form.instance.last_modified = timezone.now()
         return super(updatePhoto, self).form_valid(form)
+
+class deletePhoto(DeleteView):
+    model = Photo
+    success_url = '/photo/view/'
+
+    def form_valid(self, form):
+        if form.instance.owner != self.request.user :
+            raise PermissionDenied
+        return super(deletePhoto, self).form_valid(form)
