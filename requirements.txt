@@ -1,3 +1,4 @@
 django==1.11.7
 pillow==4.3.0
 django-appconf==1.0.2
+django-carton==1.2.1
