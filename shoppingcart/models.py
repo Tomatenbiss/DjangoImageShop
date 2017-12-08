@@ -1,7 +1,7 @@
 from django.db          import models
 from photo.models       import Photo
 from photoseries.models import Photoseries
-#from photoseries        import models
+
 from django.contrib.auth.models     import User
 
 class Cart(models.Model):
