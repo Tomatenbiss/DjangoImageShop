@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils import timezone
 from .models import Photo, PhotoCategory
@@ -29,6 +29,16 @@ class AjaxableResponseMixin(object):
             return JsonResponse(data, status=200)
         else:
             return response
+
+
+class OwnerRequiredView(object):
+    
+    def get_context_data(self, **kwargs):
+        context = super(OwnerRequiredView, self).get_context_data(**kwargs)
+        if context['object'].owner != self.request.user :
+            raise PermissionDenied
+        return context
+
 
 class categoryView(AjaxableResponseMixin, CreateView):
     model = PhotoCategory
@@ -67,22 +77,16 @@ class createPhoto(LoginRequiredMixin, CreateView):
         return super(createPhoto, self).form_valid(form)
 
 
-class updatePhoto(LoginRequiredMixin, UpdateView):
+class updatePhoto(LoginRequiredMixin, OwnerRequiredView, UpdateView):
     model = Photo
     fields = ['title', 'description', 'price', 'public']
     template_name = 'photo/photo_form.html'
 
     def form_valid(self, form):
-        if form.instance.owner != self.request.user :
-            raise PermissionDenied
         form.instance.last_modified = timezone.now()
         return super(updatePhoto, self).form_valid(form)
 
-class deletePhoto(DeleteView):
+
+class deletePhoto(LoginRequiredMixin, OwnerRequiredView, DeleteView):
     model = Photo
     success_url = '/photo/view/'
-
-    def form_valid(self, form):
-        if form.instance.owner != self.request.user :
-            raise PermissionDenied
-        return super(deletePhoto, self).form_valid(form)
