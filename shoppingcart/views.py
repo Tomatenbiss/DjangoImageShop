@@ -10,7 +10,6 @@ def add(request):
     cart.add(phot, price=phot.price)
     return HttpResponse("Added")
 
-
 def remove(request):
     cart = Cart(request.session)
     phot = Photo.objects.get(id=request.GET.get('id'))
