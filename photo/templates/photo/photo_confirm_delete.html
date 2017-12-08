@@ -1,7 +1,5 @@
-{% extends "base.html" %}
-{% block content %}
-{% load staticfiles %}
-    {% if user.groups.all.0|stringformat:"s" == "photographer"  %}
+{% extends "photo/photographer_required_template.html" %}
+{% block photographer_only_content %}
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -19,14 +17,5 @@
                 </div>
             </div>
         </div>
-    {% else %}
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <p>Sorry, you need to be signed in as an photographer in order to upload pictures!</p>
-                </div>
-            </div>
-        </div>
-    {% endif %}
 {% endblock %}
 
