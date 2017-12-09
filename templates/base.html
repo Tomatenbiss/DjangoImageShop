@@ -18,9 +18,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Shops</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'viewAll' %}">Photos</a>
                     </li>
@@ -33,12 +30,25 @@
                     </li>
                     {% endif %}
                     {% if user.groups.all.0|stringformat:"s" == "photographer" %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'upload' %}">Upload photo</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdownPhotoUpload" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Upload</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="dropdownPhotoUpload">
+                            <a class="dropdown-item" href="{% url 'upload' %}">Photo</a>
+                            <a class="dropdown-item" href="#">Photoseries</a>
+                        </div>
                     </li>
                     {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">{{ user.first_name }} {{user.last_name}}</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdownUserProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} {{ user.last_name }}</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="dropdownUserProfile">
+                            <a class="dropdown-item" href="{% url 'profile' %}">My profile</a>
+                            {% if user.groups.all.0|stringformat:"s" == "photographer" %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">My photos</a>
+                            <a class="dropdown-item" href="#">My photoseries</a>
+                            <a class="dropdown-item" href="#">Open purchases</a>
+                            {% endif %}
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
