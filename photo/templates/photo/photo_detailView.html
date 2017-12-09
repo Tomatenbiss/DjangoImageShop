@@ -15,6 +15,7 @@
                     <p>Photographer: {{ photo.owner.first_name }} {{ photo.owner.last_name }}</p>
                     <p>Uploaded: {{ photo.created }}</p>
                     <p class="muted">Resolution (W x H): {{ photo.image.width }} x {{ photo.image.height }}</p>
+                    <p>Size: {{ photo.image.size }} Bytes</p>
                     <p>Description: {{ photo.description }}</p>
                     <p>Price: {% if photo.price != 0.00 %} {{ photo.price }} € {% else %} not set {% endif %}</p>
                     {% if photo.owner == user %}
