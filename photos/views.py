@@ -91,3 +91,11 @@ class updatePhoto(LoginRequiredMixin, OwnerRequiredView, UpdateView):
 class deletePhoto(LoginRequiredMixin, OwnerRequiredView, DeleteView):
     model = Photo
     success_url = '/photos/view/'
+
+
+class viewOwnPhotos(LoginRequiredMixin, ListView):
+    model = Photo
+
+    def get_queryset(self):
+        '''Only show photos of the current User'''
+        return Photo.objects.filter(owner=self.request.user)
