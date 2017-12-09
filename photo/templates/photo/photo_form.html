@@ -8,7 +8,12 @@
                         {% include 'photo/form-template.html' %}
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                {% if object %}
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <a role="button" class="btn btn-info" href="{% url 'view' object.pk %}">Cancel</a>
+                                {% else %}
+                                <button type="submit" class="btn btn-success">Upload</button>
+                                {% endif %}
                             </div>
                         </div>
                     </form>
