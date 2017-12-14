@@ -23,7 +23,7 @@ def update_user_profile(sender, instance, created, **kwargs):
     instance.profile.save()
 
 class Photographer(Profile):
-    profile = models.OneToOneField(Profile)
+    profile = models.OneToOneField(Profile, parent_link=True, on_delete=models.CASCADE)
     # gibt noch keine shops
     # shop = OneToOneField(shop)
-    
+        

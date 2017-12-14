@@ -12,7 +12,7 @@ class Photo(models.Model):
     #schonmal ne Liste fuer die Kategorien spaeter
     tags        = []
     #Besitzer 1:M
-    owner = models.ForeignKey(User)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     #Kategorie M:N
     #categories = models.ManyToManyField('PhotoCategory')
     #modifiziert
