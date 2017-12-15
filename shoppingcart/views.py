@@ -7,8 +7,12 @@ from photo.models import Photo
 def add(request):
     cart = Cart(request.session)
     phot = Photo.objects.get(id=request.GET.get('id'))
-    cart.add(phot, price=phot.price)
-    return HttpResponse("Added")
+    if phot in cart.products:
+     return HttpResponse("Photo already in shopping cart")
+    else:
+     cart.add(phot, price=phot.price)
+     return HttpResponse("Added")
+    
 
 def remove(request):
     cart = Cart(request.session)
