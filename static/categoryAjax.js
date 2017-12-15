@@ -22,7 +22,7 @@ $(function () {
         deleteErrors();
         // send ajax request
         $.ajax({
-            url: "/photo/categories/add/",
+            url: "/photos/categories/add/",
             method: "POST",
             data: $('#categoryForm').serializeArray()
         }).done(function (data) {

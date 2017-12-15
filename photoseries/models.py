@@ -1,5 +1,5 @@
 from django.db          import models
-from photo.models       import Photo
+from photos.models       import Photo
 # Create your models here.
 
 class Photoseries(models.Model):

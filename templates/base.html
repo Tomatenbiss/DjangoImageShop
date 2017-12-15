@@ -25,7 +25,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/shoppingcart/show"><i class="fa fa-shopping-cart"></i></a>
+                        <a class="nav-link" href="/carts/show"><i class="fa fa-shopping-cart"></i></a>
                     </li>
                     {% if user.groups.all.0|stringformat:"s" == "photographer" %}
                     <li class="nav-item dropdown">
