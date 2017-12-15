@@ -1,5 +1,5 @@
 django==1.11.7
 pillow==4.3.0
 django-appconf==1.0.2
-django-carton==1.2.1
--e git://github.com/vinyll/django-imagefit.git@748afbad1305cc6cc87602dcc891f7045641b050#egg=django-imagefit
+-e git://github.com/lazybird/django-carton.git#egg=django-carton
+-e git+https://github.com/vinyll/django-imagefit.git#egg=django-imagefit
