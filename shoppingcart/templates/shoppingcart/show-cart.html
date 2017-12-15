@@ -23,6 +23,7 @@
                                         <td>{{ item.product }}</td>
                                         <td>{{ item.quantity }}</td>
                                         <td>{{ item.subtotal }}</td>
+                                        <td><a style="color: red;" class="nav-link" href="/shoppingcart/remove/?id={{ item.product.id }}"><i class="fa fa-remove"></i></a></td>
                                     </tr>
                                 {% endfor %}
                             </table>
