@@ -25,7 +25,9 @@
                     <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' photo.pk %}">Delete</a>
                     {% endif %}
                     {% if user.is_authenticated %}
+                    {% if photo.owner != user %}
                     <a class="btn btn-success btn-sm" role="button" href="{% url 'shoppingcart:add' %}?id={{ photo.id }}">Buy</a>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
