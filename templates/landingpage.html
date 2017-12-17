@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>The Image Shops</h1>
+    <div class="container">
+        <div class="row">
+            {% if object_list is not None %}
+                {% for photographer in object_list %}
+                    <div class="col-lg-3 col-sm-6">
+                        <a href="{% url 'viewShop' photographer.username %}">The shop of {{ photographer.username }}</a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if object_list is None %}
+                <p>There are no shops for now</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

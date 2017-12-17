@@ -20,3 +20,18 @@ class viewAllPhotos(ListView):
                 return None
         except User.DoesNotExist:
             return None
+
+
+class viewAllShops(ListView):
+    model = Photo
+    template_name = 'landingpage.html'
+
+    def get_queryset(self):
+
+        users = User.objects.all()
+        photographer = []
+        for user in users:
+
+            if user.groups.first() is not None and user.groups.first().name == 'photographer':
+                photographer.append(user)
+        return photographer

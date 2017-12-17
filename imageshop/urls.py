@@ -18,16 +18,16 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
-from accounts.views import start_view
 from accounts import urls as accounts_urls
 from photos import urls as photos_urls
 from carts import urls as carts_urls
 from imagefit import urls as imagefit_urls
 from shops import urls as shops_urls
+from shops.views import viewAllShops
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', start_view, name='start_view'),
+    url(r'^$', viewAllShops.as_view(), name='viewAllShops'),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^photos/', include(photos_urls)),
     url(r'^carts/', include(carts_urls, namespace='carts')),

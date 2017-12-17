@@ -6,13 +6,6 @@ from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from accounts.forms import SignUpForm
 
-# Create your views here.
-
-
-def start_view(request):
-    context = {}
-    return render(request, 'accounts/landingpage.html', context)
-
 
 def login_view(request):
     context = {}
