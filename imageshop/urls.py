@@ -23,6 +23,7 @@ from accounts import urls as accounts_urls
 from photos import urls as photos_urls
 from carts import urls as carts_urls
 from imagefit import urls as imagefit_urls
+from shops import urls as shops_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,6 +32,7 @@ urlpatterns = [
     url(r'^photos/', include(photos_urls)),
     url(r'^carts/', include(carts_urls, namespace='carts')),
     url(r'^imagefit/', include(imagefit_urls)),
+    url(r'^shops/', include(shops_urls)),
 ]
 
 if settings.DEBUG:

@@ -4,9 +4,10 @@ from django.contrib.auth.models     import User
 #from accounts.models import Profile, Photographer
 from django.core.exceptions     import ValidationError
 
+
 class Photo(models.Model):
     #Bild aus Datei
-    image       = models.ImageField(upload_to='photos/', blank=True, null=True)
+    image       = models.ImageField(upload_to='photos', blank=True, null=True)
     #Beschreibung - max_l optional 
     description = models.TextField(max_length=200)
     #schonmal ne Liste fuer die Kategorien spaeter
@@ -39,6 +40,7 @@ class Photo(models.Model):
 
     def get_absolute_url(self):
         return reverse('view', kwargs={'pk': self.pk})
+
 
 class PhotoCategory(models.Model):
     #Name der Kategorie
