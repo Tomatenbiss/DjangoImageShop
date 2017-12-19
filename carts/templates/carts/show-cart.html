@@ -14,6 +14,7 @@
                             Shopping Cart
                             <span class="badge badge-pill light-blue" style="float:right; margin-top: 4px">{{ cart.total }}</span>
                         </div>
+                        <div class="card card-body">
                         {% if cart.total > 0 %}
                             <table border="1">
                                 <tr>
@@ -35,7 +36,13 @@
                                 {% endfor %}
                             </table>
                         {% endif %}
+                     <div class="col-lg-6">
+                     </div>
+                     <div class="col-lg-6">
                      <a class="btn btn-primary" role="button" href="{% url 'carts:clear' %}">Empty</a>
+                     <a class="btn btn-success" role="button" href="">Order</a>
+                     </div>
+                     </div>
                 </div>
             </div>
             <div class="col-lg-2">
