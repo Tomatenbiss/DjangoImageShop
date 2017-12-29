@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'photos',
     'photoseries',
     'carton',
-    'imagefit'
+    'imagekit'
 ]
 
 MIDDLEWARE = [
