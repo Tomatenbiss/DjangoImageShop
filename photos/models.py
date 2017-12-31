@@ -4,7 +4,16 @@ from django.contrib.auth.models     import User
 #from accounts.models import Profile, Photographer
 from django.core.exceptions     import ValidationError
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill, SmartResize
+from imagekit.processors import ResizeToFill, SmartResize, Adjust
+from PIL import Image, ImageDraw, ImageFont
+from .processors import TextOverlayProcessor
+
+class Watermark(object):
+    def process(self, img):
+        watermark = "/root/djangogirls/tomatenbiss15/media/photos/200-star.png"
+        scaled = ImageWatermark(watermark, position=('center', 'center'), scale=True, opacity=0.2)
+        img_scaled = scaled.process(img)
+        return img_scaled
 
 class Photo(models.Model):
     #Bild aus Datei
@@ -35,9 +44,12 @@ class Photo(models.Model):
                                       options={'quality': 60})
 
     detailview = ImageSpecField(source='image',
-                                      processors=[ResizeToFill(730, 490)],
+                                      processors=[ResizeToFill(730, 490), TextOverlayProcessor(text='DjangoImageShop')],
                                       format='PNG',
                                       options={'quality': 60})
+
+    watermarked_image = ImageSpecField([Watermark(),ResizeToFill(730, 490)], source='image',
+            format='PNG', options={'quality': 90})
 
     def __str__(self):
         return "%s : %s" % (self.title, self.owner)
