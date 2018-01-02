@@ -148,3 +148,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CART_PRODUCT_MODEL = 'photos.models.Photo'
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'djangoimageshop@mediablo.net'
+EMAIL_HOST_PASSWORD = 'Django1502!'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
