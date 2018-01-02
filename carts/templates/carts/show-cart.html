@@ -13,9 +13,8 @@
                     {% get_cart as cart %}
                         <div class="card-header">
                             Shopping Cart
-                            <span class="badge badge-pill light-blue" style="float:right; margin-top: 4px">{{ cart.total }}</span>
                         </div>
-                        <div class="card card-body">
+                        <div class="card-body">
                         {% if cart.total > 0 %}
                             <table border="0" cellspacing="3" cellpadding="5" width="100%">
                                 <tr>
@@ -37,15 +36,17 @@
                         {% elif cart.total == 0 %}
                             <span>Your shoppingcart is currently empty.</span>
                         {% endif %}
-                     <div class="col-lg-6">
-                     </div>
-                     <div class="col-lg-6">
-                         {% if cart.total > 0 %}
-                         <a class="btn btn-primary" role="button" href="{% url 'carts:clear' %}">Empty</a>
-                         <a class="btn btn-success" role="button" href="">Order</a>
-                         {% endif %}
-                     </div>
-                 </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <span style="text-align:left;">
+                            {% if cart.total > 0 %}
+                            <a class="btn btn-primary btn-sm" role="button" href="{% url 'carts:clear' %}">Empty</a>
+                            <a class="btn btn-success btn-sm" role="button" href="">Order</a>
+                            {% endif %}
+                            </span>
+                            <span class="badge badge-pill light-blue" style="float:right; margin-top: 4px;">{{ cart.total }}</span>
+                            <span style="float:right; margin-right: 10px;">Total:</span>
+                        </div>
             </div>
             </div>
             <div class="col-lg-2">
