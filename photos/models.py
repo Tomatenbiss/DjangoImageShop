@@ -38,6 +38,11 @@ class Photo(models.Model):
     #Preis
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 
+    shoppingcartview = ImageSpecField(source='image',
+                                      processors=[ResizeToFill(80, 40)],
+                                      format='PNG',
+                                      options={'quality': 60})
+
     thumbnail = ImageSpecField(source='image',
                                       processors=[ResizeToFill(200, 100)],
                                       format='PNG',
