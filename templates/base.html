@@ -30,8 +30,7 @@
                     <li class="nav-item">
                     {% get_cart as cart %}
                         <a class="nav-link" href="/carts/show">
-                            <span class="badge badge-pill cart-badge">{{ cart.items|length }}</span>
-                            <i class="fa fa-shopping-cart"></i>
+                            <i class="fa fa-shopping-cart"><font size="1"><span class="badge badge-pill badge-danger">{{ cart.items|length }}</span></font></i>
                         </a>
                     </li>
                     {% if user.groups.all.0|stringformat:"s" == "photographer" %}
