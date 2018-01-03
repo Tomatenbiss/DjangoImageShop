@@ -25,6 +25,11 @@
                         <a class="nav-link" href="{% url 'viewAll' %}">Photos</a>
                     </li>
                 </ul>
+
+                <form class="form-inline" method="GET" action="/photos/search/">
+                    <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-white btn-sm my-0" type="submit">Search</button>
+                </form>
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
