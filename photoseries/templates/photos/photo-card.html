@@ -1,0 +1,12 @@
+{% load imagekit %}
+<div class="col-lg-3 col-sm-6">
+    <div class="card photo-card">
+        <img class="card-img-top" alt="{{ photo.title }}" src="{{ photo.thumbnail.url }}" />
+        <div class="info">
+            <div class="title" style="margin-left: 10px">
+                <a href="{% url 'view' photo.id %}">{{ photo.title }}</a>
+            </div>
+            <div class="desc">Photographer: {{ photo.owner }}</div>
+        </div>
+    </div>
+</div>

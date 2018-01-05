@@ -1,0 +1,21 @@
+{% extends "photos/photographer_required_template.html" %}
+{% block photographer_only_content %}
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        Do you really want to delete the following photo?
+                        <img class="card-img-top" src="{{ photo.image.url }}" alt="{{ context.photo.title }}">                        
+                        <div class="form-group">
+                            <div class="col-sm">
+                                <button type="submit" class="btn btn-danger">Yes, delete it</button>
+                                <a role="button" class="btn btn-info" href="{% url 'view' photo.pk %}">No, go back</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
