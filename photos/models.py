@@ -20,8 +20,6 @@ class Photo(models.Model):
     image       = models.ImageField(upload_to='photos', blank=True, null=True)
     #Beschreibung - max_l optional 
     description = models.TextField(max_length=200)
-    #schonmal ne Liste fuer die Kategorien spaeter
-    tags        = []
     #Besitzer 1:M
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     #Kategorie M:N
