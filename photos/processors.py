@@ -2,7 +2,14 @@ from django.conf import settings
 from imagekit import ImageSpec, register
 from PIL import Image, ImageDraw, ImageFont
 
-_default_font = ImageFont.truetype('../media/fonts/DejaVuSans-Bold.ttf', 42)
+import os
+import logging
+logger = logging.getLogger(__name__)
+dir_path = os.path.dirname(os.path.realpath(__file__))
+#logger.error(dir_path)
+
+#_default_font = ImageFont.truetype('../media/fonts/DejaVuSans-Bold.ttf', 42, encoding="unic")
+_default_font = ImageFont.load_default()
 
 
 def add_text_overlay(image, text, font=_default_font):

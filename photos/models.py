@@ -25,7 +25,7 @@ class Photo(models.Model):
     #Besitzer 1:M
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     #Kategorie M:N
-    #categories = models.ManyToManyField('PhotoCategory')
+    categories = models.ManyToManyField('PhotoCategory')
     #modifiziert
     last_modified = models.DateTimeField(auto_now_add=True,editable=False)
     #uploadclass Photo(models.Model):
