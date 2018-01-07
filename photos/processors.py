@@ -2,7 +2,7 @@ from django.conf import settings
 from imagekit import ImageSpec, register
 from PIL import Image, ImageDraw, ImageFont
 
-
+_default_font = ImageFont.load_default()
 
 
 def add_text_overlay(image, text, font=_default_font):
