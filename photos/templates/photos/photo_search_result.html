@@ -1,11 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container">
-        Results for: {{ keyword }}
+        <h2>Photos with title matching: {{ keyword }}</h2>
+        {% if photos_found_by_title %}
         <div class="row">
             {% for photo in photos_found_by_title %}
                 {% include 'photos/photo-card.html' %}
             {% endfor %}
         </div>
+        {% else %}
+        No photo with a title similiar to your keyword was found.
+        {% endif %}
+        <h2>Categories matching: {{ keyword }}</h2>
+        {% if categories %}
+            <ul class="list-inline">
+            {% for category in categories %}
+                <li class="list-inline-item">{{ category.name }}</li> 
+            {% endfor %}
+            </ul>
+        <h3>Photos featuring these categories:</h3>
+        <div class="row">
+            {% for photo in photos_found_by_category %}
+                {% include 'photos/photo-card.html' %}
+            {% endfor %}
+        </div>
+        {% else %}
+        No categories were found.
+        {% endif %}
     </div>
 {% endblock %}
