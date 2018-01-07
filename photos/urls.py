@@ -13,6 +13,5 @@ urlpatterns = [
     url(r'^categories/add/$', categoryView.as_view(), name='category_add'),
     url(r'^categories/delete/(?P<pk>[0-9]+)/$', deleteCategory.as_view(), name='category_delete'),
     url(r'^search/$', searchResultView.as_view(), name="search"),
-    # temporary view for categories
     url(r'^categories/$', categoryView.as_view(), name='categories')
 ]
