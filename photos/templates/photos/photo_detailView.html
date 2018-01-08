@@ -21,6 +21,12 @@
                     {% if photo.owner == user %}
                     <p>Last updated: {{ photo.last_modified }}</p>
                     <p>Public: {{ photo.public }}</p>
+                    <p>Categories:</p>
+                    <ul>
+                    {% for category in photo.categories.all %}
+                        <li>{{ category.name }}</li>
+                    {% endfor %}
+                    </ul>
                     <a class="btn btn-primary btn-sm" role="button" href="{% url 'update' photo.pk %}">Edit</a>
                     <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' photo.pk %}">Delete</a>
                     {% endif %}

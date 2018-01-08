@@ -6,6 +6,7 @@ from django.core.exceptions import PermissionDenied
 from django.utils import timezone
 from .models import Photo, PhotoCategory
 from django.http.response import JsonResponse
+from .forms import AddCategory
 
 
 class AjaxableResponseMixin(object):
@@ -51,6 +52,14 @@ class categoryView(AjaxableResponseMixin, CreateView):
         context['categories'] = PhotoCategory.objects.filter();
         return context
 
+    def dispatch(self, *args, **kwargs):
+        return super(categoryView, self).dispatch(*args, **kwargs)
+
+class deleteCategory(LoginRequiredMixin, DeleteView):
+    model = PhotoCategory
+    success_url = '/photos/categories/'
+
+
 
 class viewPhoto(DetailView):
     model = Photo
@@ -68,8 +77,10 @@ class viewAllPhotos(ListView):
 
 class createPhoto(LoginRequiredMixin, CreateView):
     model = Photo
-    fields = ['title', 'description', 'image', 'price', 'public']
+    fields = ['title', 'description', 'image', 'price', 'public', 'categories']
     template_name = 'photos/photo_form.html'
+
+    
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -77,10 +88,9 @@ class createPhoto(LoginRequiredMixin, CreateView):
         form.instance.last_modified = timezone.now()
         return super(createPhoto, self).form_valid(form)
 
-
 class updatePhoto(LoginRequiredMixin, OwnerRequiredView, UpdateView):
     model = Photo
-    fields = ['title', 'description', 'price', 'public']
+    fields = ['title', 'description', 'price', 'public', 'categories']
     template_name = 'photos/photo_form.html'
 
     def form_valid(self, form):
@@ -109,5 +119,7 @@ class searchResultView(TemplateView):
         context['keyword'] = keyword
         # Search in titles 
         context['photos_found_by_title'] = Photo.objects.filter(title__contains=keyword)
-        # TODO: Search in tags
+        # Search in categories
+        context['categories'] = PhotoCategory.objects.filter(name__contains=keyword)
+        context['photos_found_by_category'] = Photo.objects.filter(categories__in=context['categories'])
         return context;
