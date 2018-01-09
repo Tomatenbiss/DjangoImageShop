@@ -8,7 +8,7 @@ from django.utils import timezone
 # Create your views here.
 class createPhotoseries(LoginRequiredMixin, CreateView):
     model = Photoseries
-    fields = ['title', 'describtion', 'images']
+    fields = ['title', 'describtion', 'images', 'price']
     template_name = 'photos/photo_form.html'
 
     def form_valid(self, form):
@@ -28,6 +28,7 @@ def upload_photos(request):
         files = request.FILES.getlist('images')
         describtion = request.POST['describtion']
         title = request.POST['title']
+        price = request.POST['price']
         for number, a_file in enumerate(files):
             instance = Photo(image=a_file, owner = request.user)
             instance.save()

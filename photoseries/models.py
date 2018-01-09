@@ -10,9 +10,17 @@ class Photoseries(models.Model):
     images      = models.ManyToManyField(Photo)
     tags        = []
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 
     def __str__(self):
         return (self.owner.username + " : " + self.title)
+
+    def clean(self):
+        if self.price < 0.00:
+            raise ValidationError({'price': 'The price can\'t be negative.'})
+        # price has to be set as soon as the public attribute is true
+        if self.public and self.price == 0.00:
+            raise ValidationError({'price': 'You have to set a price for the photoseries.'})
 
     def get_absolute_url(self):
         return reverse('view', kwargs={'pk': self.pk})
