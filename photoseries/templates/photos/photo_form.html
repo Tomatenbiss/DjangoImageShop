@@ -12,11 +12,13 @@
                                 <button type="submit" class="btn btn-success">Save</button>
                                 <a role="button" class="btn btn-info" href="{% url 'view' object.pk %}">Cancel</a>
                                 {% else %}
+                                <input type="file" name="images" multiple>
                                 <button type="submit" class="btn btn-success">Upload</button>
                                 <a role="button" class="btn btn-info cancel-action" href="javascript:window.history.back()" >Cancel</a>
                                 {% endif %}
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>

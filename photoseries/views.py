@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, render_to_response
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Photoseries
@@ -22,3 +22,17 @@ class createPhotoseries(LoginRequiredMixin, CreateView):
         #form.fields['images'].queryset = self.request.user.a_set.all()
         form.fields['images'].queryset = Photo.objects.filter(owner=self.request.user) 
         return form
+
+def upload_photos(request):
+    if request.method == "POST":
+        files = request.FILES.getlist('images')
+        for number, a_file in enumerate(files):
+            instance = Photo(image=a_file, owner = request.user)
+            instance.save()
+        return redirect('upload_done')
+
+    return render(request, 'photos/upload.html')
+
+
+def upload_done(request):
+    return render_to_response('photos/upload_done.html')

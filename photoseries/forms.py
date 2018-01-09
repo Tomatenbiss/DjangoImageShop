@@ -1,5 +1,6 @@
 from django import forms
 from .models import Photoseries
+from multiupload.fields import MultiFileField
 
 class PhotoSeriesForm(forms.ModelForm):
     
@@ -7,12 +8,12 @@ class PhotoSeriesForm(forms.ModelForm):
         model = Photoseries
         fields = (
             'images', 
-            'description', 
-            'tags',
+            'describtion', 
             'title',
         )
-    images = forms.ImageField(label="Bild wählen")
-    
+    #images = forms.ImageField(label="Bild wählen")
+    images = MultiFileField(min_num=1, max_num=3, max_file_size=1024*1024*5)
+
     def save(self, commit=True):
         PhotoSeries.images      = self.cleaned_data['images']
         PhotoSeries.description = self.cleaned_data['description']
