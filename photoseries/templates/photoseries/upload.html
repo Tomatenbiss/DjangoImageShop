@@ -3,8 +3,10 @@
 
 
 {% block title %}Adding Multiple Files{% endblock %}
+{% load staticfiles %}
 
 {% block content %}
+
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
@@ -26,14 +28,6 @@
             <label class="control-label col-sm-2"><label for="id_describtion">Describtion:</label></label>
             
             <div class="col-sm-10"><input type="text" name="describtion" maxlength="100" required id="id_describtion" /></div>
-        </div>
-
-        <div class="col-sm-offset-2 col-sm-10">
-                <span id="price_errorList" class="text-danger small"></span>
-            </div>
-            <label class="control-label col-sm-2"><label for="id_price">Price:</label></label>
-
-            <div class="col-sm-10"><input type="number" name="price" value="0.0" step="0.01" required id="id_price" /></div>
         </div>
         
         <div class="col-sm-offset-2 col-sm-10">

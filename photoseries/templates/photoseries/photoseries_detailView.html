@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load imagekit %}
+{% block content %}
+Photoseries
+{% for photo in images %}
+
+    <div class="row">
+        <div class="col-8">
+            <div class="card mb-3">
+                <img  src="{{ photo.detailview.url }}" alt="{{ photo.title }}">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
