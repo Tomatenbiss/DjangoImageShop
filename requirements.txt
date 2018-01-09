@@ -3,3 +3,4 @@ pillow==4.3.0
 django-appconf==1.0.2
 -e git://github.com/lazybird/django-carton.git#egg=django-carton
 -e git+https://github.com/matthewwithanm/django-imagekit.git#egg=django-imagekit
+-e git+https://github.com/Chive/django-multiupload.git#egg=multiupload
