@@ -12,17 +12,18 @@
         <link rel="stylesheet" href='{% static "/css/profile.css" %}'/>
         <link rel="stylesheet" href='{% static "/css/photos.css" %}'/>
         <link rel="stylesheet" href='{% static "/css/carts.css" %}'/>
+        <link rel="stylesheet" href='{% static "/css/navbar.css" %}'/>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-            <a class="navbar-brand" href="/">Image Shop</a>
+            <a class="{% if request.resolver_match.url_name == 'viewAll' %}navbar-active{% endif %} navbar-brand" href="{% url 'viewAll' %}">Image Shop</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'viewAll' %}">Photos</a>
+                        <a class="{% if request.resolver_match.url_name == 'viewAllShops' %}navbar-active{% endif %} nav-link" href="/">Shops</a>
                     </li>
                 </ul>
 
@@ -40,22 +41,23 @@
                     </li>
                     {% if user.groups.all.0|stringformat:"s" == "photographer" %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="dropdownPhotoUpload" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Upload</a>
+                        <a class="{% if request.resolver_match.url_name == 'upload' %}navbar-active{% endif %} nav-link dropdown-toggle" id="dropdownPhotoUpload" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Upload</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="dropdownPhotoUpload">
-                            <a class="dropdown-item" href="{% url 'upload' %}">Photo</a>
-                            <a class="dropdown-item" href="#">Photoseries</a>
+                            <a class="dropdown-item dropdown-hover" href="{% url 'upload' %}">Photo</a>
+                            <a class="dropdown-item dropdown-hover" href="#">Photoseries</a>
                         </div>
                     </li>
                     {% endif %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="dropdownUserProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} {{ user.last_name }}</a>
+                        <a class="{% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'viewOwn' %}navbar-active{% endif %} nav-link dropdown-toggle"
+                                id="dropdownUserProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} {{ user.last_name }}</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="dropdownUserProfile">
-                            <a class="dropdown-item" href="{% url 'profile' %}">My profile</a>
+                            <a class="dropdown-item dropdown-hover" href="{% url 'profile' %}">My profile</a>
                             {% if user.groups.all.0|stringformat:"s" == "photographer" %}
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'viewOwn' %}">My photos</a>
-                            <a class="dropdown-item" href="#">My photoseries</a>
-                            <a class="dropdown-item" href="#">Open purchases</a>
+                            <a class="dropdown-item dropdown-hover" href="{% url 'viewOwn' %}">My photos</a>
+                            <a class="dropdown-item dropdown-hover" href="#">My photoseries</a>
+                            <a class="dropdown-item dropdown-hover" href="#">Open purchases</a>
                             {% endif %}
                         </div>
                     </li>
@@ -64,10 +66,10 @@
                     </li>
                     {% else %}
                     <li class="nav-item">   
-                        <a class="nav-link" href="{% url 'login_view' %}">Login</a>
+                        <a class="{% if request.resolver_match.url_name == 'login_view' %}navbar-active{% endif %} nav-link" href="{% url 'login_view' %}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'registration' %}">Registration</a>
+                        <a class="{% if request.resolver_match.url_name == 'registration' %}navbar-active{% endif %} nav-link" href="{% url 'registration' %}">Registration</a>
                     </li>
                     {% endif %}
                 </ul>

@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+    {% if request.resolver_match.url_name == 'viewOwn' %}
+        <h3 style="margin-left: 15px">My Photos</h3>
+    {% endif %}
     <div class="container">
         <div class="row">
             {% for photo in object_list %}
