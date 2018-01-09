@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 from accounts import urls as accounts_urls
 from photos import urls as photos_urls
+from photoseries import urls as photoseries_urls
 from carts import urls as carts_urls
 from shops import urls as shops_urls
 from shops.views import viewAllShops
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r'^$', viewAllShops.as_view(), name='viewAllShops'),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^photos/', include(photos_urls)),
+    url(r'^photoseries/', include(photoseries_urls)),
     url(r'^carts/', include(carts_urls, namespace='carts')),
     url(r'^shops/', include(shops_urls)),
 ]

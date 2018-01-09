@@ -26,6 +26,8 @@ class createPhotoseries(LoginRequiredMixin, CreateView):
 def upload_photos(request):
     if request.method == "POST":
         files = request.FILES.getlist('images')
+        describtion = request.POST['describtion']
+        title = request.POST['title']
         for number, a_file in enumerate(files):
             instance = Photo(image=a_file, owner = request.user)
             instance.save()
