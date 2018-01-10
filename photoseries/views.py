@@ -10,7 +10,7 @@ from django.utils import timezone
 class createPhotoseries(LoginRequiredMixin, CreateView):
     model = Photoseries
     fields = ['title', 'describtion', 'images', 'price']
-    template_name = 'photos/photo_form.html'
+    template_name = 'photoseries/photoseries_form.html'
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -40,11 +40,11 @@ def upload_photos(request):
             
         return redirect('upload_done')
 
-    return render(request, 'photos/upload.html')
+    return render(request, 'photoseries/upload.html')
 
 
 def upload_done(request):
-    return render_to_response('photos/upload_done.html')
+    return render_to_response('photoseries/upload_done.html')
 
 class viewPhotoseries(DetailView):
     model = Photo
