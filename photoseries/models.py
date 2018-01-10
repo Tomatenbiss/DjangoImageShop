@@ -10,6 +10,7 @@ class Photoseries(models.Model):
     images      = models.ManyToManyField(Photo)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+    public = models.BooleanField(default=False)
 
     def __str__(self):
         return (self.owner.username + " : " + self.title)
