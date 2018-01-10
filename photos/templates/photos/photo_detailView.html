@@ -18,15 +18,20 @@
                     <p>Size: {{ photo.image.size }} Bytes</p>
                     <p>Description: {{ photo.description }}</p>
                     <p>Price: {% if photo.price != 0.00 %} {{ photo.price }} € {% else %} not set {% endif %}</p>
-                    {% if photo.owner == user %}
-                    <p>Last updated: {{ photo.last_modified }}</p>
-                    <p>Public: {{ photo.public }}</p>
-                    <p>Categories:</p>
+                    <p>Categories:
+                    {% if photo.categories.all %}
                     <ul>
                     {% for category in photo.categories.all %}
                         <li>{{ category.name }}</li>
                     {% endfor %}
                     </ul>
+                    {% else %}
+                    None
+                    {% endif %}
+                    </p>
+                    {% if photo.owner == user %}
+                    <p>Last updated: {{ photo.last_modified }}</p>
+                    <p>Public: {{ photo.public }}</p>
                     <a class="btn btn-primary btn-sm" role="button" href="{% url 'update' photo.pk %}">Edit</a>
                     <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' photo.pk %}">Delete</a>
                     {% endif %}
