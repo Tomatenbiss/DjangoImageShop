@@ -46,6 +46,11 @@ class Photo(models.Model):
                                       format='PNG',
                                       options={'quality': 60})
 
+    watermarked_thumbnail = ImageSpecField(source='image',
+                                      processors=[ResizeToFill(200, 100), TextOverlayProcessor(text='DjangoImageShop')],
+                                      format='PNG',
+                                      options={'quality': 60})
+
     detailview = ImageSpecField(source='image',
                                       processors=[ResizeToFill(730, 490)],
                                       format='PNG',

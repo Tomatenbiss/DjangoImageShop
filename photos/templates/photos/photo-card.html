@@ -1,7 +1,7 @@
 {% load imagekit %}
 <div class="col-lg-3 col-sm-6">
     <div class="card photo-card">
-        <img class="card-img-top" alt="{{ photo.title }}" src="{{ photo.thumbnail.url }}" />
+        <img class="card-img-top" alt="{{ photo.title }}" src="{{ photo.watermarked_thumbnail.url }}" />
         <div>
             <h4>
                 <a href="{% url 'view' photo.id %}">{{ photo.title }}</a>
