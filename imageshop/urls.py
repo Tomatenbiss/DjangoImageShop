@@ -36,6 +36,8 @@ urlpatterns = [
     url(r'^shops/', include(shops_urls)),
     # for django-dynamic-link. By default it catch url/serve/some-dynamic-link/
     url(r'^w+/%s/' % presettings.DYNAMIC_LINK_URL_BASE_COMPONENT, include('dynamicLink.urls')),
+    url(r'^lg/%s/' % presettings.DYNAMIC_LINK_URL_BASE_COMPONENT, include('dynamicLink.urls')),
+    url(r'^de/%s/' % presettings.DYNAMIC_LINK_URL_BASE_COMPONENT, include('dynamicLink.urls')),
 ]
 
 if settings.DEBUG:
