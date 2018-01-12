@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    {% load staticfiles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" />
     {% if request.user.is_authenticated %}Welcome {{ request.user.username }}, you are signed in as a {{ user.groups.all.0 }}
         <div class="container">
             <div class="row">
@@ -22,13 +23,14 @@
                             <div class="desc"> Rated: 4.2 </div>
                         </div>
                         <div class="bottom">
-                            <a class="btn btn-primary btn-twitter btn-sm" href="#">
+                            <a class="btn btn-primary btn-twitter btn-sm disabled" href="#">
                                 <i class="fa fa-twitter"></i>
                             </a>
-                            <a class="btn btn-primary btn-sm" rel="publisher"
+                            <a class="btn btn-primary btn-sm disabled" rel="publisher"
                                href="#">
                                 <i class="fa fa-facebook"></i>
                             </a>
+                            <a href="../profile/edit/" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Edit</a>
                         </div>
                     </div>
                 </div>

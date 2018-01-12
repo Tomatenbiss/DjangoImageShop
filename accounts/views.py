@@ -4,7 +4,9 @@ from __future__ import unicode_literals
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
-from accounts.forms import SignUpForm
+from accounts.forms import SignUpForm, EditProfileForm
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
 
 
 def login_view(request):
@@ -15,6 +17,18 @@ def login_view(request):
 def profile(request):
     context = {}
     return render(request, 'accounts/profile.html', context)
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/accounts/profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'accounts/edit_profile.html', args)
 
 
 def registration(request):
