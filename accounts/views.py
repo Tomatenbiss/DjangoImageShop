@@ -6,8 +6,8 @@ from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from accounts.forms import SignUpForm, EditProfileForm
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm
-
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 def login_view(request):
     context = {}
@@ -30,6 +30,18 @@ def edit_profile(request):
         args = {'form': form}
         return render(request, 'accounts/edit_profile.html', args)
 
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/accounts/profile')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        args = {'form': form}
+        return render(request, 'accounts/change_password.html', args)
 
 def registration(request):
     if request.method == 'POST':

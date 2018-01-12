@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" />
+    {% load staticfiles %}
     {% if request.user.is_authenticated %}Welcome {{ request.user.username }}, you are signed in as a {{ user.groups.all.0 }}
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            My Profile
+                           My Profile
                         </div>
                         <div class="avatar">
                             <img alt="" src="http://astrologie-momentmal.de/wp-content/uploads/testimonails/mustermann476333.jpg">
