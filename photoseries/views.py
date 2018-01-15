@@ -47,7 +47,7 @@ def upload_done(request):
     return render_to_response('photoseries/upload_done.html')
 
 class viewPhotoseries(DetailView):
-    model = Photo
+    model = Photoseries
     template_name = 'photoseries/photoseries_detailView.html'
 
 
