@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load imagekit %}
 {% block content %}
-Photoseries
+Photoseries {{ photoseries.title }}
 {% for photo in photoseries.images.all %}
 
     <div class="row">
