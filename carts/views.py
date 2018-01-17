@@ -10,13 +10,18 @@ def add(request):
     try:
         photseries = Photoseries.objects.get(id=request.GET.get('id'))
         photss = photseries.images.all()
+        iterations = 0
         for phots in photss:
-            #print "object is a photoseries"
-            if phots in cart.products:
-               cart.remove(phots)
-               cart.add(phots, price=photseries.price)
-            else:
-               cart.add(phots, price=photseries.price)
+           if iterations == 0:
+              if phots in cart.products:
+                 cart.remove(phots)
+                 cart.add(phots, price=photseries.price)
+                 iterations += 1
+              else:
+                 cart.add(phots, price=photseries.price)
+                 iterations += 1
+           else:
+              cart.add(phots, 0.0)
         return render(request, 'carts/redirect.html')
     except:
         phot = Photo.objects.get(id=request.GET.get('id'))
