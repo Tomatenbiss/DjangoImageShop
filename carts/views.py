@@ -14,22 +14,34 @@ def add(request):
         for phots in photss:
            if iterations == 0:
               if phots in cart.products:
-                 cart.remove(phots)
-                 cart.add(phots, price=photseries.price)
-                 iterations += 1
+                 if request.user == phots.owner:
+                     return HttpResponse("You can not buy your own photoseries. Sorry.")
+                 else:
+                     cart.remove(phots)
+                     cart.add(phots, price=photseries.price)
+                     iterations += 1
               else:
-                 cart.add(phots, price=photseries.price)
-                 iterations += 1
+                 if request.user == phots.owner:
+                     return HttpResponse("You can not buy your own photoseries. Sorry.")
+                 else:
+                     cart.add(phots, price=photseries.price)
+                     iterations += 1
            else:
-              cart.add(phots, 0.0)
+              if request.user == phots.owner:
+                  return HttpResponse("You can not buy your own photoseries. Sorry.")
+              else:
+                  cart.add(phots, 0.0)
         return render(request, 'carts/redirect.html')
     except:
         phot = Photo.objects.get(id=request.GET.get('id'))
         if phot in cart.products:
             return HttpResponse("Photo already in shopping cart")
         else:
-            cart.add(phot, price=phot.price)
-            return render(request, 'carts/redirect.html')
+            if request.user == phot.owner:
+                return HttpResponse("You can not buy your own photos. Sorry.")
+            else:
+                cart.add(phot, price=phot.price)
+                return render(request, 'carts/redirect.html')
 
 def remove(request):
     cart = Cart(request.session)
