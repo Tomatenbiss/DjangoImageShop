@@ -11,6 +11,16 @@
         {% else %}
         No photo with a title similiar to your keyword was found.
         {% endif %}
+        <h2>Photos with {{ keyword }} in the description</h2>
+        {% if photos_found_by_description %}
+        <div class="row">
+            {% for photo in photos_found_by_description %}
+                {% include 'photos/photo-card.html' %}
+            {% endfor %}
+        </div>
+        {% else %}
+        No photos with {{keyword}} in the description were found.
+        {% endif %}
         <h2>Categories matching: {{ keyword }}</h2>
         {% if categories %}
             <ul class="list-inline">
