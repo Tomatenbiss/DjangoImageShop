@@ -6,18 +6,21 @@ from .models import Photoseries
 from photos.models import Photo
 from django.utils import timezone
 
-# Create your views here.
+# form for photoseries
 class createPhotoseries(LoginRequiredMixin, CreateView):
     model = Photoseries
+    # fields that can be edited
     fields = ['title', 'describtion', 'images', 'price']
     template_name = 'photoseries/photoseries_form.html'
-
+    
+    # set owner based on session and add timestamps
     def form_valid(self, form):
         form.instance.owner = self.request.user
         form.instance.created = timezone.now()
         form.instance.last_modified = timezone.now()
         return super(createPhotoseries, self).form_valid(form)
 
+    # get images from photographer and display them for selection
     def get_form(self, *args, **kwargs):
         form = super(createPhotoseries, self).get_form(*args, **kwargs)
         #form.fields['images'].queryset = self.request.user.a_set.all()
@@ -26,18 +29,24 @@ class createPhotoseries(LoginRequiredMixin, CreateView):
 
 def upload_photos(request):
     if request.method == "POST":
+        # get fields from page and build object
         files = request.FILES.getlist('images')
         describtion = request.POST['describtion']
         title = request.POST['title']
         price = request.POST['price']
         owner = request.user
         s_instance = Photoseries(title = title , describtion = describtion, owner = owner, price = price)
+        # save series before adding images
         s_instance.save()
+        # iterate over files
         for a_file in enumerate(files):
+            # create & save Image for every file
             p_instance = Photo(image=a_file, owner = owner, public = True)
             p_instance.save()
+            # add image to series
             s_instance.images.add(p_instance)
-            
+        # save modified series
+        s_instance.save()
         return redirect('upload_done')
 
     return render(request, 'photoseries/upload.html')
