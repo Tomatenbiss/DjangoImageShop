@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, render_to_response
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -58,4 +59,10 @@ class viewPhotoseries(DetailView):
     model = Photoseries
     template_name = 'photoseries/photoseries_detailView.html'
 
+class viewOwnPhotoseries(LoginRequiredMixin, ListView):
+    model = Photoseries
+
+    def get_queryset(self):
+        '''Only show photos of the current User'''
+        return Photoseries.objects.filter(owner=self.request.user)
 
