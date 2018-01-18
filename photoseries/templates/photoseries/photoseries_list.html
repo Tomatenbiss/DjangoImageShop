@@ -2,8 +2,8 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            {% for photo in object_list %}
-                {% include 'photos/photo-card.html' %}
+            {% for photoseries in object_list %}
+            <a href="{% url 'view_series' photoseries.id %}">{{ photoseries.title }}</a>
             {% endfor %}
         </div>
     </div>
