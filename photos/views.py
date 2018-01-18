@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils import timezone
 from .models import Photo, PhotoCategory
+from photoseries.models import Photoseries
 from django.http.response import JsonResponse
 from .forms import AddCategory
 
@@ -118,11 +119,11 @@ class searchResultView(TemplateView):
         keyword = self.request.GET['keyword']
         context['keyword'] = keyword
         # Search for photos
-        # Search in titles 
         context['photos_found_by_title'] = Photo.objects.filter(title__contains=keyword)
-        # Search in description
         context['photos_found_by_description'] = Photo.objects.filter(description__contains=keyword)
-        # Search in categories
         context['categories'] = PhotoCategory.objects.filter(name__contains=keyword)
         context['photos_found_by_category'] = Photo.objects.filter(categories__in=context['categories'])
+        # Search for photoseries
+        context['photoseries_found_by_title'] = Photoseries.objects.filter(title__contains=keyword)
+        context['photoseries_found_by_description'] = Photoseries.objects.filter(description__contains=keyword)
         return context;

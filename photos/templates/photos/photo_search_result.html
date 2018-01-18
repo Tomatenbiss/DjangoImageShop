@@ -37,5 +37,25 @@
         {% else %}
         No categories were found.
         {% endif %}
+        <h2>Photoseries with title matching: {{ keyword }} </h2>
+        {% if photoseries_found_by_title %}
+        <div class="row">
+            {% for photoseries in photoseries_found_by_title %}
+                <a href="{% url 'view_series' photoseries.id %}">{{ photoseries.title }}</a>
+            {% endfor %}
+        </div>
+        {% else %}
+        No photoseries were found.
+        {% endif %}
+        <h2>Photoseries with {{ keyword }} in the description</h2>
+        {% if photoseries_found_by_description %}
+        <div class="row">
+            {% for photoseries in photoseries_found_by_description %}
+                <a href="{% url 'view_series' photoseries.id %}">{{ photoseries.title }}</a>
+            {% endfor %}
+        </div>
+        {% else %}
+        No photoseries were found.
+        {% endif %}
     </div>
 {% endblock %}
