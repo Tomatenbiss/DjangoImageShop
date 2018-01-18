@@ -10,7 +10,7 @@ from django.utils import timezone
 class createPhotoseries(LoginRequiredMixin, CreateView):
     model = Photoseries
     # fields that can be edited
-    fields = ['title', 'describtion', 'images', 'price']
+    fields = ['title', 'description', 'images', 'price']
     template_name = 'photoseries/photoseries_form.html'
     
     # set owner based on session and add timestamps
@@ -31,10 +31,10 @@ def upload_photos(request):
     if request.method == "POST":
         # get fields from page and build object
         files = request.FILES.getlist('images')
-        describtion = request.POST['describtion']
+        description = request.POST['description']
         title = request.POST['title']
         price = 2.0
-        s_instance = Photoseries(title = title , describtion = describtion, owner=request.user ,price = price)
+        s_instance = Photoseries(title = title , description = description, owner=request.user ,price = price)
         # save series before adding images
         s_instance.save()
         # iterate over files

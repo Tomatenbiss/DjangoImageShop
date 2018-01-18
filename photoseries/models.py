@@ -8,8 +8,8 @@ from django.urls import reverse
 class Photoseries(models.Model):
     # title of the series
     title       = models.CharField(max_length=20)
-    # describtion of 100 characters
-    describtion = models.CharField(max_length=100)
+    # description of 100 characters
+    description = models.CharField(max_length=100)
     # relation to images in the series
     images      = models.ManyToManyField(Photo)
     # owner gets set automatically on creation
