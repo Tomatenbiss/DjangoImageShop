@@ -24,7 +24,7 @@ class createPhotoseries(LoginRequiredMixin, CreateView):
     def get_form(self, *args, **kwargs):
         form = super(createPhotoseries, self).get_form(*args, **kwargs)
         #form.fields['images'].queryset = self.request.user.a_set.all()
-        form.fields['images'].queryset = Photo.objects.all()
+        form.fields['images'].queryset = Photo.objects.filter(owner=self.request.user)
         return form
 
 def upload_photos(request):
@@ -38,9 +38,9 @@ def upload_photos(request):
         # save series before adding images
         s_instance.save()
         # iterate over files
-        for a_file in enumerate(files):
+        for count,a_file in enumerate(files):
             # create & save Image for every file
-            p_instance = Photo(image=a_file, public = False)
+            p_instance = Photo(image=a_file, owner=request.user, public = False)
             p_instance.save()
             # add image to series
             s_instance.images.add(p_instance)
