@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'carts',
     'photos',
     'photoseries',
+    'search',
     'carton',
     'imagekit',
     'dynamicLink'
