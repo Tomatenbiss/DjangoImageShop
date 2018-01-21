@@ -12,7 +12,7 @@
         {% if order.paid %}
             You've marked this order as payed.
         {% else %}
-            You haven't marked this order as payed. <a href="">Mark as payed now</a>
+            You haven't marked this order as payed. <a href="{% url 'payOrder' order.id %}">Mark as payed now</a>
         {% endif %}
     {% elif user == order.buyer %}
         <h2>Download</h2>

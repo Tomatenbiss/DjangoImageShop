@@ -1,9 +1,12 @@
 from django.views.generic import ListView
+from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, SuspiciousOperation
 
 from orders.models import Order
+
+import datetime
 
 # Create your views here.
 
@@ -44,3 +47,19 @@ class viewMyOpenOrders(LoginRequiredMixin, ListView):
         if not self.request.user.groups.filter(name='photographer').exists():
              raise PermissionDenied
         return context
+
+class markOpenOrderAsPaid(RedirectView):
+    permanent = False
+    query_string = True
+    pattern_name = 'viewOrder'
+
+    def get_redirect_url(self, *args, **kwargs):
+        order = Order.objects.get(id=kwargs['pk'])
+        if order.seller != self.request.user:
+            raise PermissionDenied
+        if order.paid:
+            raise SuspiciousOperation("Order was already paid.")
+        order.paid = True;
+        order.paidDate = datetime.datetime.now();
+        order.save();
+        return super(markOpenOrderAsPaid, self).get_redirect_url(*args, **kwargs)
