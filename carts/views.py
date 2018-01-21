@@ -84,6 +84,7 @@ class checkoutView(TemplateView):
             for photo in photo_list:
                 # Delete key to save a new photo instance to the database
                 photo.pk = None
+                photo.order_copy = True
                 photo.save()
                 order.photos.add(photo)
             orders.append(order)

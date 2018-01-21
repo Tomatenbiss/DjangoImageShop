@@ -29,16 +29,15 @@
                     None
                     {% endif %}
                     </p>
-                    {% if photo.owner == user %}
+                    {% if order %}
+                    <p>This is an archived version of a photo from an order: <a role="button" class="button" href="">Go to order</a></p>
+                    {% elif photo.owner == user %}
                     <p>Last updated: {{ photo.last_modified }}</p>
                     <p>Public: {{ photo.public }}</p>
                     <a class="btn btn-primary btn-sm" role="button" href="{% url 'update' photo.pk %}">Edit</a>
                     <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' photo.pk %}">Delete</a>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                    {% if photo.owner != user %}
+                    {% elif user.is_authenticated %}
                     <a class="btn btn-success btn-sm" role="button" href="{% url 'carts:add' %}?id={{ photo.id }}">Buy</a>
-                    {% endif %}
                     {% endif %}
                 </div>
             </div>

@@ -15,7 +15,7 @@ class viewAllPhotos(ListView):
         try:
             user = User.objects.get(username=username)
             if user.groups.first().name == 'photographer':
-                return Photo.objects.filter(public=True, owner=user)
+                return Photo.objects.filter(public=True, owner=user, order_copy=False)
             else:
                 return None
         except User.DoesNotExist:
