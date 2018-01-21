@@ -1,9 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import TemplateView
+from django.contrib import auth
 
 from carton.cart import Cart
 from photos.models import Photo
 from photoseries.models import Photoseries
+from orders.models import Order
+
+from django.core.exceptions import SuspiciousOperation
 
 def add(request):
     cart = Cart(request.session)
@@ -57,3 +62,46 @@ def clear(request):
 
 def show(request):
     return render(request, 'carts/show-cart.html')
+
+class checkoutView(TemplateView):
+    template_name = "carts/checkout.html"
+
+    def get_context_data(self, **kwargs):
+        '''Hooks into request lifecycle and processes the order'''
+        # Get cart from the current session
+        cart = Cart(self.request.session)
+        if not cart.products:
+            raise SuspiciousOperation("Cart is empty")
+        # Split cart by photo/photoseries owner
+        sellers_photo_dict = self.__split_by_owner(cart.products)
+        # Create order for each author
+        orders = []
+        for seller, photo_list in sellers_photo_dict.items():
+            order = Order()
+            order.buyer = auth.get_user(self.request)
+            order.seller = seller
+            order.save()
+            for photo in photo_list:
+                # Delete key to save a new photo instance to the database
+                photo.pk = None
+                photo.save()
+                order.photos.add(photo)
+            orders.append(order)
+        # 4. Versende für jede Order zwei Mails
+          # 4.1 Bestätigungsmail
+          # 4.2 Mail mit Info für den Verkäufer
+        # Show success message to user
+        context = super(checkoutView, self).get_context_data(**kwargs)
+        context['orders'] = orders
+        cart.clear()
+        return context
+
+    def __split_by_owner(self, list_to_split):
+        # dict format: {owner1: [obj1, obj2, ...], ...}
+        owner_object_list_dict = {}
+        for obj in list_to_split:
+            if (owner_object_list_dict.get(obj.owner)):
+                owner_object_list_dict.get(obj.owner).append(obj)
+            else:
+                owner_object_list_dict[obj.owner] = [obj]
+        return owner_object_list_dict

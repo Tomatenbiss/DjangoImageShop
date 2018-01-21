@@ -18,11 +18,6 @@ class Order(models.Model):
     # Date when the order was paid
     paidDate = models.DateTimeField(null=True,blank=True)
 
-    def __init__(self, buyer, seller):
-        super(Order, self).__init__()
-        self.buyer = buyer
-        self.seller = seller
-
     def getTotalPrice():
         # Calculates the total price of this order
         totalSum = 0
