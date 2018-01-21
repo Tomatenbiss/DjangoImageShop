@@ -2,12 +2,13 @@
 {% load imagekit %}
 {% block content %}
 Photoseries {{ photoseries.title }}
-<div class="row">
 {% for photo in photoseries.images.all %}
 
-            <div class="col-md-2">
-                <img  src="{{ photo.thumbnail.url }}" alt="{{ photo.title }}">
-
+    <div class="row">
+        <div class="col-8">
+            <div class="card mb-3">
+                <img  src="{{ photo.watermarked_detailview.url }}" alt="{{ photo.title }}">
+            </div>
         </div>
     {% endfor %}
 
@@ -16,7 +17,8 @@ Photoseries {{ photoseries.title }}
                 <div class="card-body">
                     <h4 class="card-title">{{ photoseries.title }}</h4>
                     <p>Photographer: {{ photoseries.owner.first_name }} {{ photoseries.owner.last_name }}</p>
-                    <p>Description: {{ photoseries.description }}</p>
+                    
+                    <p>Describtion: {{ photoseries.description }}</p>
                     <p>Price: {% if photoseries.price != 0.00 %} {{ photoseries.price }} € {% else %} not set {% endif %}</p>
                     {% if photoseries.owner == user %}
                     <p>Public: {{ photoseries.public }}</p>
