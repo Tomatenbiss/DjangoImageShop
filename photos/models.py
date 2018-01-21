@@ -35,6 +35,8 @@ class Photo(models.Model):
     public = models.BooleanField(default=False)
     #Preis
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+    #Zeigt an, ob das Bild nur für eine Bestellung erstellt wurde
+    order_copy = models.BooleanField(default=False)
 
     shoppingcartview = ImageSpecField(source='image',
                                       processors=[ResizeToFill(80, 40)],
