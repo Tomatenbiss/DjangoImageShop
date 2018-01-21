@@ -53,11 +53,12 @@
                                 id="dropdownUserProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} {{ user.last_name }}</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="dropdownUserProfile">
                             <a class="dropdown-item dropdown-hover" href="{% url 'profile' %}">My profile</a>
+                            <a class="dropdown-item dropdown-hover" href="{% url 'myOrders' %}">My orders</a>
                             {% if user.groups.all.0|stringformat:"s" == "photographer" %}
+                            <a class="dropdown-item dropdown-hover" href="{% url 'myOpenOrders' %}">My open orders</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item dropdown-hover" href="{% url 'viewOwn' %}">My photos</a>
                             <a class="dropdown-item dropdown-hover" href="{% url 'viewOwn_series' %}">My photoseries</a>
-                            <a class="dropdown-item dropdown-hover" href="#">Open purchases</a>
                             {% endif %}
                         </div>
                     </li>

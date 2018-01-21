@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    Buyer:{{ order.buyer }} Seller:{{ order.seller }}
+    {% for photo in order.photos.all %}
+    <div class="row">
+        {% include 'photos/photo-card.html' %}
+    </div>
+    {% endfor %}
+    {% if user == order.seller %}
+        <h2>Payment status</h2>
+        {% if order.paid %}
+            You've marked this order as payed.
+        {% else %}
+            You haven't marked this order as payed. <a href="">Mark as payed now</a>
+        {% endif %}
+    {% elif user == order.buyer %}
+        <h2>Download</h2>
+        {% if order.paid %}
+            Your download is valid 24 hours.
+            <a href="">Download</a>
+        {% else %}
+            The seller hasn't marked this order as payed, you can't download the photos at this time.
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
