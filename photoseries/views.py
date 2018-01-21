@@ -57,7 +57,7 @@ def upload_done(request):
 
 class viewPhotoseries(DetailView):
     model = Photoseries
-    template_name = 'photoseries/photoseries_detailView.html'
+    template_name = 'photoseries/photoseries_thumbnails.html'
 
 class viewOwnPhotoseries(LoginRequiredMixin, ListView):
     model = Photoseries

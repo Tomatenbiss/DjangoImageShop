@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load imagekit %}
+{% block content %}
+Photoseries {{ photoseries.title }}
+<div class="row">
+{% for photo in photoseries.images.all %}
+
+            <div class="col-md-2">
+                <img  src="{{ photo.thumbnail.url }}" alt="{{ photo.title }}">
+
+        </div>
+    {% endfor %}
+
+        <div class="col-4">
+            <div class="card border-dark mb-3">
+                <div class="card-body">
+                    <h4 class="card-title">{{ photoseries.title }}</h4>
+                    <p>Photographer: {{ photoseries.owner.first_name }} {{ photoseries.owner.last_name }}</p>
+                    <p>Description: {{ photoseries.description }}</p>
+                    <p>Price: {% if photoseries.price != 0.00 %} {{ photoseries.price }} € {% else %} not set {% endif %}</p>
+                    {% if photoseries.owner == user %}
+                    <p>Public: {{ photoseries.public }}</p>
+                    {# <a class="btn btn-primary btn-sm" role="button" href="{% url 'update' photo.pk %}">Edit</a> #}
+                    {# <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' photo.pk %}">Delete</a> #}
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    {% if photoseries.owner != user %}
+                    <a class="btn btn-success btn-sm" role="button" href="{% url 'carts:add' %}?id={{ photoseries.id }}">Buy</a>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

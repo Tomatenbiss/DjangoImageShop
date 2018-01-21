@@ -11,7 +11,7 @@ class PhotoSeriesForm(forms.ModelForm):
             'description', 
             'title',
         )
-    images = MultiFileField(min_num=1, max_num=3, max_file_size=1024*1024*5)
+    images = MultiFileField(min_num=1, max_num=12, max_file_size=1024*1024*5)
 
     def save(self, commit=True):
         PhotoSeries.images      = self.cleaned_data['images']
