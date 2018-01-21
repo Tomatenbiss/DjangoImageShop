@@ -25,6 +25,7 @@ from carts import urls as carts_urls
 from shops import urls as shops_urls
 from shops.views import viewAllShops
 from search import urls as search_urls
+from orders import urls as order_urls
 from dynamicLink import presettings
 
 urlpatterns = [
@@ -36,6 +37,7 @@ urlpatterns = [
     url(r'^carts/', include(carts_urls, namespace='carts')),
     url(r'^shops/', include(shops_urls)),
     url(r'^search/', include(search_urls)),
+    url(r'^orders/', include(order_urls)),
     # for django-dynamic-link. By default it catch url/serve/some-dynamic-link/
     url(r'^w+/%s/' % presettings.DYNAMIC_LINK_URL_BASE_COMPONENT, include('dynamicLink.urls')),
     url(r'^lg/%s/' % presettings.DYNAMIC_LINK_URL_BASE_COMPONENT, include('dynamicLink.urls')),
