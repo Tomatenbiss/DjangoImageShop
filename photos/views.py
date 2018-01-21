@@ -9,7 +9,6 @@ from photoseries.models import Photoseries
 from django.http.response import JsonResponse
 from .forms import AddCategory
 
-
 class AjaxableResponseMixin(object):
     """
     Mixin to add AJAX support to a form.
@@ -56,10 +55,10 @@ class categoryView(AjaxableResponseMixin, CreateView):
     def dispatch(self, *args, **kwargs):
         return super(categoryView, self).dispatch(*args, **kwargs)
 
+
 class deleteCategory(LoginRequiredMixin, DeleteView):
     model = PhotoCategory
     success_url = '/photos/categories/'
-
 
 
 class viewPhoto(DetailView):
@@ -81,13 +80,12 @@ class createPhoto(LoginRequiredMixin, CreateView):
     fields = ['title', 'description', 'image', 'price', 'public', 'categories']
     template_name = 'photos/photo_form.html'
 
-    
-
     def form_valid(self, form):
         form.instance.owner = self.request.user
         form.instance.created = timezone.now()
         form.instance.last_modified = timezone.now()
         return super(createPhoto, self).form_valid(form)
+
 
 class updatePhoto(LoginRequiredMixin, OwnerRequiredView, UpdateView):
     model = Photo
