@@ -6,14 +6,14 @@ from .views import  (createPhotoseries,
                     viewPhotoseries, 
                     viewOwnPhotoseries, 
                     updatePhotoseries,
-                    deletePhotoseries)
+                    deletePhotoseries,listPhotoseries)
 
 from .forms import PhotoSeriesForm
 urlpatterns = [
     # view photoseries
    url(r'^view/(?P<pk>[0-9]+)/$', viewPhotoseries.as_view(), name='view_series'),
    url(r'^thumb/(?P<pk>[0-9]+)/$', viewPhotoseries.as_view(), name='view_series'),
-
+    url(r'^list/$', listPhotoseries.as_view(), name='list_series'),
     # upload from existing images
     url(r'^add/$', createPhotoseries.as_view(), name='upload_series'),
     # uplaod new images into series

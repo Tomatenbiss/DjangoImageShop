@@ -84,6 +84,10 @@ class viewOwnPhotoseries(LoginRequiredMixin, ListView):
         '''Only show photos of the current User'''
         return Photoseries.objects.filter(owner=self.request.user)
 
+class listPhotoseries(LoginRequiredMixin, ListView):
+    model = Photoseries
+    template_name = 'photoseries/photoseries_list.html'
+
 class updatePhotoseries(LoginRequiredMixin, UpdateView):
     model = Photoseries
     fields = ['title', 
