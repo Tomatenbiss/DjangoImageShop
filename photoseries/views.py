@@ -35,7 +35,6 @@ class createPhotoseries(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         form.instance.created = timezone.now()
-        form.instance.last_modified = timezone.now()
         form.save()
         return super(createPhotoseries, self).form_valid(form)
 
@@ -52,7 +51,7 @@ def upload_photos(request):
         files = request.FILES.getlist('images')
         description = request.POST['description']
         title = request.POST['title']
-        pub = request.POST['public']
+        pub = False
         price = 2.0
         s_instance = Photoseries(title = title , description = description, owner=request.user ,price = price, public = pub)
         # save series before adding images
@@ -66,7 +65,7 @@ def upload_photos(request):
             s_instance.images.add(p_instance)
         # save modified series
         s_instance.save()
-        return redirect('viewPhotoseries')
+        return redirect(viewPhotoseries)
 
     return render(request, 'photoseries/upload.html')
 
