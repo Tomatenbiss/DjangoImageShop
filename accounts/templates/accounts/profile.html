@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
     {% load staticfiles %}
-    {% if request.user.is_authenticated %}Welcome {{ request.user.username }}, you are signed in as a {{ user.groups.all.0 }}
+    {% if request.user.is_authenticated %}
+        <span style="margin-left: 15px">Welcome {{ request.user.username }}, you are signed in as a {{ user.groups.all.0 }}</span>
+        <br><br>
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
-                    <div class="card">
+                    <div class="card profile-card">
                         <div class="card-header">
                            My Profile
-                        </div>
-                        <div class="avatar">
-                            <img alt="" src="http://astrologie-momentmal.de/wp-content/uploads/testimonails/mustermann476333.jpg">
                         </div>
                         <div class="info">
                             <div class="title profile-name">
@@ -18,8 +17,6 @@
                             </div>
                             <div class="desc"> Email: {{ request.user.email }}</div>
                             <div class="desc"> Age: {{ request.user.profile.calculate_age }}</div>
-                            <div class="desc"> Interests: Photography, Painting, Tennis</div>
-                            <div class="desc"> Rated: 4.2 </div>
                         </div>
                         <div class="bottom">
                             <a class="btn btn-primary btn-twitter btn-sm disabled" href="#">

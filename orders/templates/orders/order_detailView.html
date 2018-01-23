@@ -8,6 +8,7 @@
     </div>
     {% endfor %}
     {% if user == order.seller %}
+        <br><br>
         <h2>Payment status</h2>
         {% if order.paid %}
             You've marked this order as payed.
