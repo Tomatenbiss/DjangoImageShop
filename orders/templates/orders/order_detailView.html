@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-    Buyer:{{ order.buyer }} Seller:{{ order.seller }}
+    <!-- Buyer:{{ order.buyer }} Seller:{{ order.seller }} -->
     {% for photo in order.photos.all %}
     <div class="row">
         {% include 'photos/photo-card.html' %}
@@ -15,6 +15,7 @@
             You haven't marked this order as payed. <a href="{% url 'payOrder' order.id %}">Mark as payed now</a>
         {% endif %}
     {% elif user == order.buyer %}
+        <br><br>
         <h2>Download</h2>
         {% if order.paid %}
             Your download is valid 24 hours.

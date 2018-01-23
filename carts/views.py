@@ -1,9 +1,13 @@
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib import auth
 
 from carton.cart import Cart
+
+from imageshop import settings
 from photos.models import Photo
 from photoseries.models import Photoseries
 from orders.models import Order
@@ -90,7 +94,26 @@ class checkoutView(TemplateView):
             orders.append(order)
         # 4. Versende für jede Order zwei Mails
           # 4.1 Bestätigungsmail
+            buyer = User.objects.get(id=order.buyer_id)
+            send_mail(
+                'Order Confirmation',
+                'Your order was confirmed. The owner will contact you for the payment.',
+                settings.EMAIL_HOST_USER,
+                [buyer.email],
+                fail_silently=True,
+                auth_user=settings.EMAIL_HOST_USER,
+                auth_password=settings.EMAIL_HOST_PASSWORD
+            )
           # 4.2 Mail mit Info für den Verkäufer
+            send_mail(
+                'New Order',
+                'You got a new order. Please login to accept the incoming order',
+                settings.EMAIL_HOST_USER,
+                [order.seller.email],
+                fail_silently=True,
+                auth_user=settings.EMAIL_HOST_USER,
+                auth_password=settings.EMAIL_HOST_PASSWORD
+            )
         # Show success message to user
         context = super(checkoutView, self).get_context_data(**kwargs)
         context['orders'] = orders
