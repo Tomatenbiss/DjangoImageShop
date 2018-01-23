@@ -4,7 +4,7 @@
         <img class="card-img-top" alt="{{ photo.title }}" src="{{ photo.thumbnail.url }}" />
         <div class="info">
             <div class="title" style="margin-left: 10px">
-                <a href="{% url 'view' photo.id %}">{{ photo.title }}</a>
+                <a href="{% url 'photo:view' photo.id %}">{{ photo.title }}</a>
             </div>
             <div class="desc">Photographer: {{ photo.owner }}</div>
         </div>

@@ -6,7 +6,7 @@
             {% if object_list is not None %}
                 {% for photographer in object_list %}
                     <div class="col-lg-3 col-sm-6">
-                        <a href="{% url 'viewShop' photographer.username %}">The shop of {{ photographer.username }}</a>
+                        <a href="{% url 'shops:viewShop' photographer.username %}">The shop of {{ photographer.username }}</a>
                     </div>
                 {% endfor %}
             {% endif %}

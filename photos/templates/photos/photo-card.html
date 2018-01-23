@@ -4,7 +4,7 @@
         <img class="card-img-top" alt="{{ photo.title }}" src="{{ photo.watermarked_thumbnail.url }}" />
         <div>
             <h4>
-                <a href="{% url 'view' photo.id %}">{{ photo.title }}</a>
+                <a href="{% url 'photos:view' photo.id %}">{{ photo.title }}</a>
             </h4>
             <p>Photographer: {{ photo.owner }}</p>
         </div>
