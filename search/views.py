@@ -15,10 +15,10 @@ class searchResultView(TemplateView):
         keyword = self.request.GET['keyword']
         context['keyword'] = keyword
         # Search for photos
-        context['photos_found_by_title'] = Photo.objects.filter(title__contains=keyword)
-        context['photos_found_by_description'] = Photo.objects.filter(description__contains=keyword).exclude(title__contains=keyword)
+        context['photos_found_by_title'] = Photo.objects.filter(title__contains=keyword, order_copy=False)
+        context['photos_found_by_description'] = Photo.objects.filter(description__contains=keyword, order_copy=False).exclude(title__contains=keyword)
         context['categories'] = PhotoCategory.objects.filter(name__contains=keyword)
-        context['photos_found_by_category'] = Photo.objects.filter(categories__in=context['categories']).exclude(title__contains=keyword, description__contains=keyword)
+        context['photos_found_by_category'] = Photo.objects.filter(categories__in=context['categories'], order_copy=False).exclude(title__contains=keyword, description__contains=keyword)
         context['photos'] = list(chain(context['photos_found_by_title'], context['photos_found_by_description'], context['photos_found_by_category']))
         # Search for photoseries
         context['photoseries_found_by_title'] = Photoseries.objects.filter(title__contains=keyword)
