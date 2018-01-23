@@ -15,9 +15,11 @@ class Photoseries(models.Model):
     # owner gets set automatically on creation
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     # price in float
-    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.50)
     # used to hide series from public
     public = models.BooleanField(default=False)
+
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 
     # used for admin interface and database names
     def __str__(self):
