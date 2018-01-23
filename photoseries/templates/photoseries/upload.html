@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-
-
 {% block title %}Adding Multiple Files{% endblock %}
 {% load staticfiles %}
 
 {% block content %}
-
+<div class='container'>
+    <div class="row">
+        <div class="col-md-6 col-xs-10">
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
@@ -21,7 +21,7 @@
             <div class="col-sm-10"><input type="text" name="title" maxlength="20" required id="id_title" /></div>
         </div>
 
-
+        <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
                 <span id="description_errorList" class="text-danger small"></span>
             </div>
@@ -29,22 +29,22 @@
             
             <div class="col-sm-10"><input type="text" name="description" maxlength="100" required id="id_description" /></div>
         </div>
-        
+        <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
                 <span id="images_errorList" class="text-danger small"></span>
-            </div>
+            </div>        
+
             <label class="control-label col-sm-2"><label for="id_images">Images:</label></label>
             
             <div class="col-sm-10"><input type="file" name="images" multiple maxlength="100" required id="id_images" /></div>
         </div>
-            <br>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <span id="price_errorList" class="text-danger small"></span>
                 </div>
                 <label class="control-label col-sm-2"><label for="id_price">Price:</label></label>
                 <div class="col-sm-10"><input name="price" value="0.0" step="0.01" required="" id="id_price" type="number"></div>
-            </div><br>
+            </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <span id="public_errorList" class="text-danger small"></span>
@@ -62,4 +62,7 @@
                 </div>
             </div>
     </form>
+</div>
+</div>    
+</div>
 {% endblock %}

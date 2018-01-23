@@ -52,7 +52,7 @@ def upload_photos(request):
         description = request.POST['description']
         title = request.POST['title']
         pric = request.POST['price']
-        pub = request.POST['public']
+        pub = request.POST.get('public', False)
 
         s_instance = Photoseries(title = title , description = description, owner=request.user ,price = pric, public = pub)
         # save series before adding images
@@ -65,8 +65,8 @@ def upload_photos(request):
             # add image to series
             s_instance.images.add(p_instance)
         # save modified series
-        s_instance.save(commit=True)
-        return redirect(viewPhotoseries)
+        s_instance.save()
+        return redirect('/photoseries/list/')
 
     return render(request, 'photoseries/upload.html')
 

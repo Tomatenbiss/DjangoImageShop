@@ -32,10 +32,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', viewAllShops.as_view(), name='viewAllShops'),
     url(r'^accounts/', include(accounts_urls)),
-    url(r'^photos/', include(photos_urls)),
-    url(r'^photoseries/', include(photoseries_urls)),
+    url(r'^photos/', include(photos_urls, namespace='photos')),
+    url(r'^photoseries/', include(photoseries_urls, namespace='photoseries')),
     url(r'^carts/', include(carts_urls, namespace='carts')),
-    url(r'^shops/', include(shops_urls)),
+    url(r'^shops/', include(shops_urls, namespace='shops')),
     url(r'^search/', include(search_urls)),
     url(r'^orders/', include(order_urls)),
     # for django-dynamic-link. By default it catch url/serve/some-dynamic-link/

@@ -4,7 +4,6 @@
             {% for photoseries in object_list %}
         <div class="row">
                 {% include 'photoseries/photoseries_thumbinfo.html' %}
-            <a href="{% url 'view_series' photoseries.id %}">{{ photoseries.title }}</a>
         </div><br>
 
             {% endfor %}
