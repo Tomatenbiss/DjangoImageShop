@@ -8,14 +8,18 @@
         {% endif %}
         <div class="row">
             {% for order in object_list %}
+                {% if request.resolver_match.url_name == 'myOpenOrders' %}
+                <a href="{% url 'viewOrder' order.id %}" style="margin-left: 15px">Order from {{ order.buyer }}</a>
+                {% else %}
                 <a href="{% url 'viewOrder' order.id %}" style="margin-left: 15px">Order from {{ order.seller }}</a>
+                {% endif %}
             {% endfor %}
         </div>
         {% if orders_as_seller %}
         <h2>Orders others have made</h2>
         <div class="row">
             {% for order in orders_as_seller %}
-                <a href="{% url 'viewOrder' order.id %}">Order from {{ order.buyer }}</a>
+                <a href="{% url 'viewOrder' order.id %}" style="margin-left: 15px">Order from {{ order.buyer }}</a>
             {% endfor %}
         </div>
         {% endif %}
