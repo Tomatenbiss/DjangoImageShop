@@ -27,7 +27,7 @@
         {% if photoseries %}
         <div class="row">
             {% for photoserie in photoseries %}
-                <a href="{% url 'view_series' photoserie.id %}">{{ photoserie.title }}</a>
+                <a href="{% url 'photoseries:view_series' photoserie.id %}">{{ photoserie.title }}</a>
             {% endfor %}
         </div>
         {% else %}
