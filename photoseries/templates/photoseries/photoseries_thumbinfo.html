@@ -4,7 +4,7 @@
         <div class="col-4">
                 <div class="card border-dark mb-3">
                     <div class="card-body">
-                        <h4 class="card-title"><a href="{% url 'view_series' photoseries.id %}">{{ photoseries.title }}</a>
+                        <h4 class="card-title"><a href="{% url 'photoseries:view_series' photoseries.id %}">{{ photoseries.title }}</a>
                         </h4>
                         {% if photoseries.owner != user %}
                         <p><i class="fa fa-camera-retro"></i> Photographer: {{ photoseries.owner.first_name }} {{ photoseries.owner.last_name }}</p>
@@ -18,8 +18,8 @@
                         {% if photoseries.owner == user %}
     
                         <p>Public:{% if photoseries.public != False %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-close"></i>{% endif %}</p>
-                        {# <a class="btn btn-primary btn-sm" role="button" href="{% url 'update' photo.pk %}">Edit</a> #}
-                        <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete_series' photoseries.pk %}">Delete</a>
+                        {# <a class="btn btn-primary btn-sm" role="button" href="{% url 'photos:update' photo.pk %}">Edit</a> #}
+                        <a class="btn btn-danger btn-sm" role="button" href="{% url 'photoseries:delete_series' photoseries.pk %}">Delete</a>
                         {% endif %}
                         {% if user.is_authenticated %}
                         {% if photoseries.owner != user %}

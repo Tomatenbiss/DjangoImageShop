@@ -16,7 +16,6 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-            <a class="{% if request.resolver_match.url_name == 'viewAll' %}navbar-active{% endif %} navbar-brand" href="{% url 'viewAll' %}">Image Shop</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -43,8 +42,11 @@
                     <li class="nav-item dropdown">
                         <a class="{% if request.resolver_match.url_name == 'upload' %}navbar-active{% endif %} nav-link dropdown-toggle" id="dropdownPhotoUpload" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Upload</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="dropdownPhotoUpload">
-                            <a class="dropdown-item dropdown-hover" href="{% url 'upload' %}">Photo</a>
-                            <a class="dropdown-item dropdown-hover" href="#">Photoseries</a>
+                            <a class="dropdown-item dropdown-hover" href="{% url 'photos:upload' %}">Photo</a>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header">Photoseries</div> 
+                            <a class="dropdown-item dropdown-hover" href="{% url 'photoseries:uploads_series' %}">upload images</a>
+                            <a class="dropdown-item dropdown-hover" href="{% url 'photoseries:upload_series' %}">select images</a>
                         </div>
                     </li>
                     {% endif %}
@@ -57,8 +59,8 @@
                             {% if user.groups.all.0|stringformat:"s" == "photographer" %}
                             <a class="dropdown-item dropdown-hover" href="{% url 'myOpenOrders' %}">My open orders</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item dropdown-hover" href="{% url 'viewOwn' %}">My photos</a>
-                            <a class="dropdown-item dropdown-hover" href="{% url 'viewOwn_series' %}">My photoseries</a>
+                            <a class="dropdown-item dropdown-hover" href="{% url 'photos:viewOwn' %}">My photos</a>
+                            <a class="dropdown-item dropdown-hover" href="{% url 'photoseries:viewOwn_series' %}">My photoseries</a>
                             {% endif %}
                         </div>
                     </li>
