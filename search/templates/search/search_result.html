@@ -41,7 +41,7 @@
         {% if photoseries_found_by_title %}
         <div class="row">
             {% for photoseries in photoseries_found_by_title %}
-                <a href="{% url 'view_series' photoseries.id %}">{{ photoseries.title }}</a>
+                <a href="{% url 'photoseries:view_series' photoseries.id %}">{{ photoseries.title }}</a>
             {% endfor %}
         </div>
         {% else %}
@@ -51,7 +51,7 @@
         {% if photoseries_found_by_description %}
         <div class="row">
             {% for photoseries in photoseries_found_by_description %}
-                <a href="{% url 'view_series' photoseries.id %}">{{ photoseries.title }}</a>
+                <a href="{% url 'photoseries:view_series' photoseries.id %}">{{ photoseries.title }}</a>
             {% endfor %}
         </div>
         {% else %}

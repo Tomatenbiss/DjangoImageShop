@@ -8,7 +8,7 @@
                         {% include 'photos/form-template.html' %}
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                            <p><a class="btn btn-primary btn-sm" role="button" href="{% url 'categories' %}">Edit Categories</a></p>
+                            <p><a class="btn btn-primary btn-sm" role="button" href="{% url 'photos:categories' %}">Edit Categories</a></p>
                                 {% if object %}
                                 <button type="submit" class="btn btn-success">Save</button>
                                 <a role="button" class="btn btn-info" href="{% url 'photos:view' object.pk %}">Cancel</a>
