@@ -51,20 +51,21 @@ def upload_photos(request):
         files = request.FILES.getlist('images')
         description = request.POST['description']
         title = request.POST['title']
-        pub = False
-        price = 2.0
-        s_instance = Photoseries(title = title , description = description, owner=request.user ,price = price, public = pub)
+        pric = request.POST['price']
+        pub = request.POST['public']
+
+        s_instance = Photoseries(title = title , description = description, owner=request.user ,price = pric, public = pub)
         # save series before adding images
-        s_instance.save()
+        s_instance.save(False)
         # iterate over files
         for count,a_file in enumerate(files):
             # create & save Image for every file
             p_instance = Photo(image=a_file, owner=request.user, public = pub)
-            p_instance.save()
+            p_instance.save(True)
             # add image to series
             s_instance.images.add(p_instance)
         # save modified series
-        s_instance.save()
+        s_instance.save(commit=True)
         return redirect(viewPhotoseries)
 
     return render(request, 'photoseries/upload.html')
