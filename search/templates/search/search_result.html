@@ -1,26 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container">
-        <h2>Photos with title matching: {{ keyword }}</h2>
-        {% if photos_found_by_title %}
+        <h2>Photos matching: {{ keyword }}</h2>
+        {% if photos %}
         <div class="row">
-            {% for photo in photos_found_by_title %}
+            {% for photo in photos %}
                 {% include 'photos/photo-card.html' %}
             {% endfor %}
         </div>
         {% else %}
-        No photo with a title similiar to your keyword was found.
+        No photo containing your keyword was found.
         {% endif %}
-        <h2>Photos with {{ keyword }} in the description</h2>
-        {% if photos_found_by_description %}
-        <div class="row">
-            {% for photo in photos_found_by_description %}
-                {% include 'photos/photo-card.html' %}
-            {% endfor %}
-        </div>
-        {% else %}
-        No photos with {{keyword}} in the description were found.
-        {% endif %}
+        <br><br>
         <h2>Categories matching: {{ keyword }}</h2>
         {% if categories %}
             <ul class="list-inline">
@@ -28,30 +19,15 @@
                 <li class="list-inline-item">{{ category.name }}</li> 
             {% endfor %}
             </ul>
-        <h3>Photos featuring these categories:</h3>
-        <div class="row">
-            {% for photo in photos_found_by_category %}
-                {% include 'photos/photo-card.html' %}
-            {% endfor %}
-        </div>
         {% else %}
         No categories were found.
         {% endif %}
-        <h2>Photoseries with title matching: {{ keyword }} </h2>
-        {% if photoseries_found_by_title %}
+        <br><br>
+        <h2>Photoseries with matching: {{ keyword }} </h2>
+        {% if photoseries %}
         <div class="row">
-            {% for photoseries in photoseries_found_by_title %}
-                <a href="{% url 'view_series' photoseries.id %}">{{ photoseries.title }}</a>
-            {% endfor %}
-        </div>
-        {% else %}
-        No photoseries were found.
-        {% endif %}
-        <h2>Photoseries with {{ keyword }} in the description</h2>
-        {% if photoseries_found_by_description %}
-        <div class="row">
-            {% for photoseries in photoseries_found_by_description %}
-                <a href="{% url 'view_series' photoseries.id %}">{{ photoseries.title }}</a>
+            {% for photoserie in photoseries %}
+                <a href="{% url 'view_series' photoserie.id %}">{{ photoserie.title }}</a>
             {% endfor %}
         </div>
         {% else %}

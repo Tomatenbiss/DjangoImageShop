@@ -31,8 +31,8 @@ Photoseries {{ photoseries.title }}
                     {% if photoseries.owner == user %}
 
                     <p>Public:{% if photoseries.public != False %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-close"></i>{% endif %}</p>
-                    {# <a class="btn btn-primary btn-sm" role="button" href="{% url 'update' photo.pk %}">Edit</a> #}
-                    {# <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' photo.pk %}">Delete</a> #}
+                    {# <a class="btn btn-primary btn-sm" role="button" href="{% url 'photoseries:update' photo.pk %}">Edit</a> #}
+                    {# <a class="btn btn-danger btn-sm" role="button" href="{% url 'photoseries:delete' photo.pk %}">Delete</a> #}
                     {% endif %}
                     {% if user.is_authenticated %}
                     {% if photoseries.owner != user %}

@@ -22,8 +22,8 @@ Photoseries {{ photoseries.title }}
                     <p>Price: {% if photoseries.price != 0.00 %} {{ photoseries.price }} € {% else %} not set {% endif %}</p>
                     {% if photoseries.owner == user %}
                     <p>Public: {{ photoseries.public }}</p>
-                    {# <a class="btn btn-primary btn-sm" role="button" href="{% url 'update' photo.pk %}">Edit</a> #}
-                    {# <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' photo.pk %}">Delete</a> #}
+                    {# <a class="btn btn-primary btn-sm" role="button" href="{% url 'photoseries:update' photo.pk %}">Edit</a> #}
+                    {# <a class="btn btn-danger btn-sm" role="button" href="{% url 'photoseries:delete' photo.pk %}">Delete</a> #}
                     {% endif %}
                     {% if user.is_authenticated %}
                     {% if photoseries.owner != user %}
