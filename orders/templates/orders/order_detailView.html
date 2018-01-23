@@ -19,8 +19,14 @@
         <br><br>
         <h2>Download</h2>
         {% if order.paid %}
-            Your download is valid 24 hours.
-            <a href="">Download</a>
+            {% if order.get_download_links %}
+                {% for download_link in order.get_download_links %}
+                    Your download is valid 24 hours.
+                    <a href="{{ download_link }}">Download Photo</a>
+                {% endfor %}
+            {% else %}
+            Download expired.
+            {% endif %}
         {% else %}
             The seller hasn't marked this order as payed, you can't download the photos at this time.
         {% endif %}

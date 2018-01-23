@@ -5,8 +5,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied, SuspiciousOperation
 
 from orders.models import Order
+from dynamicLink.models import Download
 
 import datetime
+import random
 
 # Create your views here.
 
@@ -62,4 +64,14 @@ class markOpenOrderAsPaid(RedirectView):
         order.paid = True;
         order.paidDate = datetime.datetime.now();
         order.save();
+        # Set download links
+        for photo in order.photos.all():
+            download = Download()
+            download.slug = "slug_" + str(random.random())
+            download.file_path = photo.image.name
+            download.timeout_hours = 24
+            download.max_clicks = 0
+            download.save()
+            order.downloads.add(download)
+        order.save()
         return super(markOpenOrderAsPaid, self).get_redirect_url(*args, **kwargs)
