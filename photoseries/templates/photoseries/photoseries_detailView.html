@@ -24,14 +24,14 @@ Photoseries {{ photoseries.title }}
                     {# <p>Uploaded: {{ photo.created }}</p> ´#}
                     {# <p class="muted">Resolution (W x H): {{ photo.image.width }} x {{ photo.image.height }}</p> #}
                     {# <p>Size: {{ photo.image.size }} Bytes</p> #}
-                    <p><i class="fa fa-navicon"></i> Describtion: {{ photoseries.description }}</p>
+                    <p><i class="fa fa-navicon"></i> Description: {{ photoseries.description }}</p>
                     <p><i class="fa  fa-picture-o"><font size="4"><span class="badge badge-pill badge-success">{{ photoseries.images.all.count }}</span></font></i></p>
                     <p><i class="fa  fa-money"><font size="4"><span class="badge badge-pill badge-success">{% if photoseries.price != 0.00 %} {{ photoseries.price }} € {% else %} not set {% endif %}</span></font></i></p>
                     {% if photoseries.owner == user %}
 
                     <p>Public:{% if photoseries.public != False %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-close"></i>{% endif %}</p>
-                    {# <a class="btn btn-primary btn-sm" role="button" href="{% url 'update' photo.pk %}">Edit</a> #}
-                    {# <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete' photo.pk %}">Delete</a> #}
+                    {# <a class="btn btn-primary btn-sm" role="button" href="{% url 'update_series' photo.pk %}">Edit</a> #}
+                    {# <a class="btn btn-danger btn-sm" role="button" href="{% url 'delete_series' photo.pk %}">Delete</a> #}
                     {% endif %}
                     {% if user.is_authenticated %}
                     {% if photoseries.owner != user %}
