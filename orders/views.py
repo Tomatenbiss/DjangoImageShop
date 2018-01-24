@@ -2,10 +2,12 @@ from django.views.generic import ListView
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.core.exceptions import PermissionDenied, SuspiciousOperation
 
 from orders.models import Order
 from dynamicLink.models import Download
+from imageshop import settings
 
 import datetime
 import random
@@ -74,4 +76,16 @@ class markOpenOrderAsPaid(RedirectView):
             download.save()
             order.downloads.add(download)
         order.save()
+        download_link_string = ''
+        for download_link in order.get_download_links():
+            download_link_string += '<a href="' + str(download_link) + '">' + str(download_link) + '</a>\n'
+        send_mail(
+                'Order marked as payed',
+                'Your order was marked as payed. Below are the download links for the photos:\n' + download_link_string,
+                settings.EMAIL_HOST_USER,
+                [order.buyer.email],
+                fail_silently=True,
+                auth_user=settings.EMAIL_HOST_USER,
+                auth_password=settings.EMAIL_HOST_PASSWORD
+        )
         return super(markOpenOrderAsPaid, self).get_redirect_url(*args, **kwargs)
