@@ -53,7 +53,8 @@ def upload_photos(request):
         title = request.POST['title']
         pric = request.POST['price']
         pub = request.POST.get('public', False)
-
+        if (pub == 'on'):
+            pub = False
         s_instance = Photoseries(title = title , description = description, owner=request.user ,price = pric, public = pub)
         # save series before adding images
         s_instance.save(False)
