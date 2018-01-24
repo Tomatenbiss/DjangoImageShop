@@ -77,7 +77,7 @@ class Photo(models.Model):
             raise ValidationError({'price': 'The price has to be set, if you want to set the picture publicy visible.'})
 
     def get_absolute_url(self):
-        return reverse('view', kwargs={'pk': self.pk})
+        return reverse('photos:view', kwargs={'pk': self.pk})
 
 
 class PhotoCategory(models.Model):
@@ -93,5 +93,5 @@ class PhotoCategory(models.Model):
             raise ValidationError({'name': 'This category already exists.'})
 
     def get_absolute_url(self):
-        return reverse('categories')
+        return reverse('photos:categories')
 
