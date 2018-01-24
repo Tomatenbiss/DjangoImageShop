@@ -34,5 +34,5 @@ class Photoseries(models.Model):
             raise ValidationError({'price': 'You have to set a price for the photoseries.'})
     # needed for reverse
     def get_absolute_url(self):
-        return reverse('view_series', kwargs={'pk': self.pk})
+        return reverse('photoseries:view_series', kwargs={'pk': self.pk})
     
