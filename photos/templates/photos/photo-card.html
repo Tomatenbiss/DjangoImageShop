@@ -6,7 +6,7 @@
             <h4>
                 <a href="{% url 'photos:view' photo.id %}">{{ photo.title }}</a>
             </h4>
-            <p>Photographer: {{ photo.owner }}</p>
+            <p><i class="fa fa-camera-retro"></i> Photographer: {{ photo.owner.first_name }} {{ photo.owner.last_name }}</p>
         </div>
     </div>
 </div>
