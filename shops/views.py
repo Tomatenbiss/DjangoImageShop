@@ -1,25 +1,26 @@
 from django.contrib.auth.models import User, Group
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from photos.models import Photo
+from photoseries.models import Photoseries
 
+class viewAllPhotos(TemplateView):
+    template_name = 'shops/shop_view.html'
 
-class viewAllPhotos(ListView):
-    model = Photo
-    template_name = 'shops/photo_list.html'
-
-    def get_queryset(self):
-        ''' Only retrieve photos which are visible and match the requested photographer '''
+    def get_context_data(self, **kwargs):
+        ''' Only retrieve photos and photoseries which are visible and match the requested photographer '''
         username = self.kwargs['username']
-
+        context = super(viewAllPhotos, self).get_context_data(**kwargs)
+        context['shop_exists'] = True
         try:
             user = User.objects.get(username=username)
-            if user.groups.first().name == 'photographer':
-                return Photo.objects.filter(public=True, owner=user, order_copy=False)
-            else:
-                return None
+            if user.groups.filter(name='photographer').exists():
+                context['photos'] = Photo.objects.filter(public=True, owner=user, order_copy=False)
+                context['photoseries_list'] = Photoseries.objects.filter(public=True, owner=user)
         except User.DoesNotExist:
-            return None
+            context['shop_exists'] = False
+            return context
+        return context
 
 
 class viewAllShops(ListView):

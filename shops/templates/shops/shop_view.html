@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        {% if shop_exists %}
+        <h2>Photos</h2>
+        <div class="row">
+            {% if photos %}
+                {% for photo in photos %}
+                    {% include 'photos/photo-card.html' %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <h2>Photoseries</h2>
+        <div class="row">
+            {% if photoseries_list %}        
+                {% for photoseries in photoseries_list %}
+                    {% include 'photoseries/photoseries_thumbinfo.html' %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% else %}
+            <p>The requested shop does not exist. Please check if the username of the photographer is correct</p>
+        {% endif %}
+    </div>
+{% endblock %}
