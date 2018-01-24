@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+    {% if request.resolver_match.url_name == 'viewOwn_series' %}
+        <h3 style="margin-left: 15px">My Photoseries</h3>
+    {% endif %}
     <div class="container">
-            {% for photoseries in object_list %}
         <div class="row">
-                {% include 'photoseries/photoseries_thumbinfo.html' %}
-        </div><br>
-
-            {% endfor %}
+        {% for photoseries in object_list %}
+            {% include 'photoseries/photoseries_thumbinfo.html' %}
+        {% endfor %}
+        </div>
     </div>
 {% endblock %}
