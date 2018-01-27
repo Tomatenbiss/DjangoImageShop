@@ -93,11 +93,14 @@ class viewOwnPhotoseries(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         '''Only show photos of the current User'''
-        return Photoseries.objects.filter(owner=self.request.user)
+        return Photoseries.objects.filter(owner=self.request.user, order_copy=False)
 
 class listPhotoseries(LoginRequiredMixin, ListView):
     model = Photoseries
     template_name = 'photoseries/photoseries_list.html'
+
+    def get_queryset(self):
+        return Photoseries.objects.filter(order_copy=False)
 
 class updatePhotoseries(LoginRequiredMixin, UpdateView):
     model = Photoseries
