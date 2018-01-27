@@ -30,7 +30,7 @@
                     {% endif %}
                     </p>
                     {% if order %}
-                    <p>This is an archived version of a photo from an order: <a role="button" class="button" href="">Go to order</a></p>
+                    <p>This is an archived version of a photo from an order: <a role="button" class="button" href="{% url 'viewOrder' order.id %}">Go to order</a></p>
                     {% elif photo.owner == user %}
                     <p>Last updated: {{ photo.last_modified }}</p>
                     <p>Public: {{ photo.public }}</p>
