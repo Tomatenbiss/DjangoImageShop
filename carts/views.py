@@ -12,30 +12,39 @@ from photos.models import Photo
 from photoseries.models import Photoseries
 from orders.models import Order
 
-from django.core.exceptions import SuspiciousOperation
+from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
+
+def __get_product_from_request(request):
+    product_type = request.GET.get('product')
+    if product_type != 'photo' and product_type != 'photoseries':
+        raise SuspiciousOperation("Unknown product type!")
+    try:
+        if product_type == 'photo':
+            return Photo.objects.get(id=request.GET.get('id'))
+        else:
+            return Photoseries.objects.get(id=request.GET.get('id'))
+    except ObjectDoesNotExist:
+        raise SuspiciousOperation(
+            "Photo or photoseries with this key does not exist")
 
 def add(request):
     cart = Cart(request.session)
-    try:
-        photseries = Photoseries.objects.get(id=request.GET.get('id'))
-        cart.add(photseries, price=photseries.price)
-        return render(request, 'carts/redirect.html')
-    except:
-        phot = Photo.objects.get(id=request.GET.get('id'))
-#        if phot in cart.products:
-#            return HttpResponse("Photo already in shopping cart")
-#        else:
- #           if request.user == phot.owner:
-  #              return HttpResponse("You can not buy your own photos. Sorry.")
-   #         else:
-        cart.add(phot, price=phot.price)
-        return render(request, 'carts/redirect.html')
+    product = __get_product_from_request(request)
+    if product in cart.products:
+        raise SuspiciousOperation("Photo already in shopping cart")
+    if product.owner == request.user:
+        raise SuspiciousOperation("You can not buy your own photos")
+    cart.add(product, price=product.price)
+    
+    return render(request, 'carts/redirect.html')
+
 
 def remove(request):
     cart = Cart(request.session)
-    phot = Photo.objects.get(id=request.GET.get('id'))
-    cart.remove(phot)
+    product = __get_product_from_request(request)
+    cart.remove(product)
     return render(request, 'carts/redirect.html')
+
 
 def clear(request):
     cart = Cart(request.session)
@@ -45,6 +54,7 @@ def clear(request):
 
 def show(request):
     return render(request, 'carts/show-cart.html')
+
 
 class checkoutView(TemplateView):
     template_name = "carts/checkout.html"

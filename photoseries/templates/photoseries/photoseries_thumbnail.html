@@ -36,7 +36,7 @@ Photoseries {{ photoseries.title }}
                     {% endif %}
                     {% if user.is_authenticated %}
                     {% if photoseries.owner != user %}
-                    <a class="btn btn-success btn-sm" role="button" href="{% url 'carts:add' %}?id={{ photoseries.id }}">Buy</a>
+                    <a class="btn btn-success btn-sm" role="button" href="{% url 'carts:add' %}?product=photoseries&id={{ photoseries.id }}">Buy</a>
 
                     {% endif %}
                     {% endif %}
