@@ -8,6 +8,11 @@
         <!--<div class="col-lg-3 col-sm-6">Seller: {{ order.seller }}</div>-->
     </div>
     {% endfor %}
+    {% for photoseries in order.photoseries.all %}
+    <div class="row">
+        {% include 'photoseries/photoseries_thumbinfo.html' %} 
+    </div>
+    {% endfor %}
     {% endfor %}
 </div>
 {% endblock %}

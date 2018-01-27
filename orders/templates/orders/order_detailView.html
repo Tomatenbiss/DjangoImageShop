@@ -7,6 +7,11 @@
         {% include 'photos/photo-card.html' %}
     </div>
     {% endfor %}
+    {% for photoseries in order.photoseries.all %}
+    <div class="row">
+        {% include 'photoseries/photoseries_thumbinfo.html' %} 
+    </div>
+    {% endfor %}
     {% if user == order.seller %}
         <br><br>
         <h2>Payment status</h2>

@@ -9,6 +9,7 @@ from django.views.generic.detail    import DetailView
 from django.contrib.auth.mixins     import LoginRequiredMixin
 from .models                        import Photoseries
 from photos.models                  import Photo
+from orders.models                  import Order
 from django.utils                   import timezone
 from django.core.exceptions         import PermissionDenied
 
@@ -78,6 +79,14 @@ def upload_done(request):
 class viewPhotoseries(DetailView):
     model = Photoseries
     template_name = 'photoseries/photoseries_thumbnail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(viewPhotoseries, self).get_context_data(**kwargs)
+        if context['object'].order_copy:
+            context['order'] = Order.objects.get(photoseries__in=[context['object']])
+            if (self.request.user != context['order'].seller and self.request.user != context['order'].buyer):
+                raise PermissionDenied
+        return context
 
 class viewOwnPhotoseries(LoginRequiredMixin, ListView):
     model = Photoseries

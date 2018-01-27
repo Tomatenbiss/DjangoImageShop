@@ -65,22 +65,36 @@ class checkoutView(TemplateView):
         cart = Cart(self.request.session)
         if not cart.products:
             raise SuspiciousOperation("Cart is empty")
-        # Split cart by photo/photoseries owner
-        sellers_photo_dict = self.__split_by_owner(cart.products)
         # Create order for each author
         orders = []
-        for seller, photo_list in sellers_photo_dict.items():
-            order = Order()
-            order.buyer = auth.get_user(self.request)
-            order.seller = seller
+        for product in cart.products:
+            # Save new instance of product to the database
+            product.order_copy = True
+            # Backup reference to images from photoseries
+            if isinstance(product, Photoseries):
+                original_images = product.images.all()
+            product.pk = None
+            product.save()
+            # Set reference to images again
+            if isinstance(product, Photoseries):
+                product.images.set(original_images)
+                product.save()
+            # Check if order for seller exists
+            existing_order = [order for order in orders if order.seller == product.owner]
+            if len(existing_order) != 1:
+                order = Order()
+                order.buyer = auth.get_user(self.request)
+                order.seller = product.owner
+                orders.append(order)
+                order.save()
+            else:
+                order = existing_order[0]
+            # Put product inside order
+            if isinstance(product, Photo):
+                order.photos.add(product)
+            else:
+                order.photoseries.add(product)
             order.save()
-            for photo in photo_list:
-                # Delete key to save a new photo instance to the database
-                photo.pk = None
-                photo.order_copy = True
-                photo.save()
-                order.photos.add(photo)
-            orders.append(order)
         # 4. Versende für jede Order zwei Mails
           # 4.1 Bestätigungsmail
             buyer = User.objects.get(id=order.buyer_id)
@@ -108,13 +122,3 @@ class checkoutView(TemplateView):
         context['orders'] = orders
         cart.clear()
         return context
-
-    def __split_by_owner(self, list_to_split):
-        # dict format: {owner1: [obj1, obj2, ...], ...}
-        owner_object_list_dict = {}
-        for obj in list_to_split:
-            if (owner_object_list_dict.get(obj.owner)):
-                owner_object_list_dict.get(obj.owner).append(obj)
-            else:
-                owner_object_list_dict[obj.owner] = [obj]
-        return owner_object_list_dict
