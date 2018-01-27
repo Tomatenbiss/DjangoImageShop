@@ -66,8 +66,13 @@ class markOpenOrderAsPaid(RedirectView):
         order.paid = True;
         order.paidDate = datetime.datetime.now();
         order.save();
-        # Set download links
-        for photo in order.photos.all():
+        # Create list of all photos
+        photos = list(order.photos.all());
+        for photoseries in order.photoseries.all():
+            for image in photoseries.images.all():
+                photos.append(image)
+        # Set download links for all photos
+        for photo in photos:
             download = Download()
             download.slug = "slug_" + str(random.random())
             download.file_path = photo.image.name
