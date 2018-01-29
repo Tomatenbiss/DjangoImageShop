@@ -20,18 +20,24 @@
                                 <tr>
                                     <th>Picture</th>
                                     <th>Title</th>
-                                    <th>Series</th>
                                     <th>Photographer</th>
                                     <th>Price</th>
                                 </tr>
                                 {% for item in cart.items %}
                                     <tr>
-                                        <td><img alt="{{ item.product.title }}" src="{{ item.product.shoppingcartview.url }}"></td>
+                                      {% if item.product.images != NULL %}
+                                         <td><img alt="{{ item.product.title }}" src="/media/photos/photoseries.png"></td>
+                                      {% else %}
+                                         <td><img alt="{{ item.product.title }}" src="{{ item.product.shoppingcartview.url }}"></td>
+                                      {% endif %}
                                         <td>{{ item.product.title }}</td>
-                                        <td>Single</td>
-                                        <td>{{ item.product.owner }}</td>
+                                        <td>{{ item.product.owner.first_name }} {{ item.product.owner.last_name }}</td>
                                         <td>{{ item.subtotal }}</td>
-                                        <td><a style="color: red;" class="nav-link" href="/carts/remove/?id={{ item.product.id }}"><i class="fa fa-remove"></i></a></td>
+                                        {% if item.product.images != NULL %}
+                                        <td><a style="color: red;" class="nav-link" href="/carts/remove/?product=photoseries&id={{ item.product.id }}"><i class="fa fa-remove"></i></a></td>
+                                      {% else %}
+                                      <td><a style="color: red;" class="nav-link" href="/carts/remove/?product=photo&id={{ item.product.id }}"><i class="fa fa-remove"></i></a></td>
+                                      {% endif %}
                                     </tr>
                                 {% endfor %}
                             </table>

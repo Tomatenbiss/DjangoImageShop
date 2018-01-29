@@ -21,6 +21,9 @@ class Photoseries(models.Model):
 
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 
+    # if this is a copy for an order
+    order_copy = models.BooleanField(default=False)
+
     # used for admin interface and database names
     def __str__(self):
         return (self.owner.username + " : " + self.title)

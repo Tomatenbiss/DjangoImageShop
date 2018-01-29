@@ -21,7 +21,7 @@ class searchResultView(TemplateView):
         context['photos_found_by_category'] = Photo.objects.filter(categories__in=context['categories'], order_copy=False).exclude(title__contains=keyword, description__contains=keyword)
         context['photos'] = set(chain(context['photos_found_by_title'], context['photos_found_by_description'], context['photos_found_by_category']))
         # Search for photoseries
-        context['photoseries_found_by_title'] = Photoseries.objects.filter(title__contains=keyword)
-        context['photoseries_found_by_description'] = Photoseries.objects.filter(description__contains=keyword).exclude(title__contains=keyword)
+        context['photoseries_found_by_title'] = Photoseries.objects.filter(title__contains=keyword, order_copy=False)
+        context['photoseries_found_by_description'] = Photoseries.objects.filter(description__contains=keyword, order_copy=False).exclude(title__contains=keyword)
         context['photoseries'] = set(chain(context['photoseries_found_by_title'], context['photoseries_found_by_description']))
         return context

@@ -16,7 +16,7 @@ class viewAllPhotos(TemplateView):
             user = User.objects.get(username=username)
             if user.groups.filter(name='photographer').exists():
                 context['photos'] = Photo.objects.filter(public=True, owner=user, order_copy=False)
-                context['photoseries_list'] = Photoseries.objects.filter(public=True, owner=user)
+                context['photoseries_list'] = Photoseries.objects.filter(public=True, owner=user, order_copy=False)
         except User.DoesNotExist:
             context['shop_exists'] = False
             return context

@@ -150,7 +150,7 @@ DATETIME_INPUT_FORMATS = ('%d/%m/%Y %H:%M:%S', '%d/%m/%Y %H:%M', '%d/%m/%Y',
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-CART_PRODUCT_MODEL = 'photos.models.Photo'
+#CART_PRODUCT_MODEL = 'photos.models.Photo'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
