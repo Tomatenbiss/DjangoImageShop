@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import View, ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,32 +6,6 @@ from django.core.exceptions import PermissionDenied
 from django.utils import timezone
 from .models import Photo, PhotoCategory
 from orders.models import Order
-from django.http.response import JsonResponse
-from .forms import AddCategory
-
-class AjaxableResponseMixin(object):
-    """
-    Mixin to add AJAX support to a form.
-    Must be used with an object-based FormView (e.g. CreateView)
-    """
-    def form_invalid(self, form):
-        response = super(AjaxableResponseMixin, self).form_invalid(form)
-        if self.request.is_ajax():
-            return JsonResponse(form.errors, status=400)
-        else:
-            return response
-
-    def form_valid(self, form):
-        response = super(AjaxableResponseMixin, self).form_valid(form)
-        if self.request.is_ajax():
-            data = {
-                # BAD - this works only for categories
-                'name': form.instance.name,
-            }
-            return JsonResponse(data, status=200)
-        else:
-            return response
-
 
 class OwnerRequiredView(object):
     
@@ -42,7 +16,7 @@ class OwnerRequiredView(object):
         return context
 
 
-class categoryView(AjaxableResponseMixin, CreateView):
+class categoryView(CreateView):
     model = PhotoCategory
     fields = ['name']
     template_name = 'photos/categories.html'
@@ -51,9 +25,6 @@ class categoryView(AjaxableResponseMixin, CreateView):
         context = super(categoryView, self).get_context_data(**kwargs)
         context['categories'] = PhotoCategory.objects.filter();
         return context
-
-    def dispatch(self, *args, **kwargs):
-        return super(categoryView, self).dispatch(*args, **kwargs)
 
 
 class deleteCategory(LoginRequiredMixin, DeleteView):
