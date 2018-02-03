@@ -9,7 +9,7 @@
     {% endfor %}
     {% for photoseries in order.photoseries.all %}
     <div class="row">
-        {% include 'photoseries/photoseries_thumbinfo.html' %} 
+        {% include 'photoseries/photoseries-card.html' %} 
     </div>
     {% endfor %}
     {% if user == order.seller %}
