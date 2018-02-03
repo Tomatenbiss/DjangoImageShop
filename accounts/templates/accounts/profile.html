@@ -19,14 +19,7 @@
                             <div class="desc"> Age: {{ request.user.profile.calculate_age }}</div>
                         </div>
                         <div class="bottom">
-                            <a class="btn btn-primary btn-twitter btn-sm disabled" href="#">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                            <a class="btn btn-primary btn-sm disabled" rel="publisher"
-                               href="#">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                            <a href="../profile/edit/" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Edit</a>
+                            <a href="{% url 'edit_profile' %}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Edit</a>
                         </div>
                     </div>
                 </div>
