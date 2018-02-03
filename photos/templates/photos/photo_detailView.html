@@ -17,23 +17,23 @@
                     <p class="muted">Resolution (W x H): {{ photo.image.width }} x {{ photo.image.height }}</p>
                     <p>Size: {{ photo.image.size }} Bytes</p>
                     <p>Description: {{ photo.description }}</p>
-                    <p>Price: {% if photo.price != 0.00 %} {{ photo.price }} € {% else %} not set {% endif %}</p>
                     <p>Categories:
-                    {% if photo.categories.all %}
-                    <ul>
-                    {% for category in photo.categories.all %}
-                        <li>{{ category.name }}</li>
-                    {% endfor %}
-                    </ul>
-                    {% else %}
-                    None
-                    {% endif %}
+                        {% if photo.categories.all %}
+                        <ul>
+                            {% for category in photo.categories.all %}
+                            <li>{{ category.name }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        None
+                        {% endif %}
                     </p>
+                    <p>Price: <font size="4"><span class="badge badge-pill badge-success">{% if photo.price != 0.00 %} {{ photo.price }} € {% else %} not set {% endif %}</span></font></p>
                     {% if order %}
                     <p>This is an archived version of a photo from an order: <a role="button" class="button" href="{% url 'viewOrder' order.id %}">Go to order</a></p>
                     {% elif photo.owner == user %}
                     <p>Last updated: {{ photo.last_modified }}</p>
-                    <p>Public: {{ photo.public }}</p>
+                    <p>Public:{% if photoseries.public != False %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-close"></i>{% endif %}</p>
                     <a class="btn btn-primary btn-sm" role="button" href="{% url 'photos:update' photo.pk %}">Edit</a>
                     <a class="btn btn-danger btn-sm" role="button" href="{% url 'photos:delete' photo.pk %}">Delete</a>
                     {% elif user.is_authenticated %}
