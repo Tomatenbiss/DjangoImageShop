@@ -78,7 +78,7 @@ def upload_done(request):
 
 class viewPhotoseries(DetailView):
     model = Photoseries
-    template_name = 'photoseries/photoseries_thumbnail.html'
+    template_name = 'photoseries/photoseries_detailView.html'
 
     def get_context_data(self, **kwargs):
         context = super(viewPhotoseries, self).get_context_data(**kwargs)
