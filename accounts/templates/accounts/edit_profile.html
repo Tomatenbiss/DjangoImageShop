@@ -3,7 +3,8 @@
 <div class="container">
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% include 'form-template.html' %}
+        <p>You can change your password here: <a href="{% url 'change_password' %}">Change Password</a></p>
         <button type="submit">Submit</button>
     </form>
 </div>

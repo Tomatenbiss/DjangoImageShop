@@ -27,6 +27,8 @@ def edit_profile(request):
             return redirect('/accounts/profile')
     else:
         form = EditProfileForm(instance=request.user)
+        # Manually delete the password field since the form does not respect the fields definition in forms.py
+        del form.fields['password']
         args = {'form': form}
         return render(request, 'accounts/edit_profile.html', args)
 
