@@ -43,7 +43,7 @@ class createPhotoseries(LoginRequiredMixin, CreateView):
     def get_form(self, *args, **kwargs):
         form = super(createPhotoseries, self).get_form(*args, **kwargs)
         #form.fields['images'].queryset = self.request.user.a_set.all()
-        form.fields['images'].queryset = Photo.objects.filter(owner=self.request.user)
+        form.fields['images'].queryset = Photo.objects.filter(owner=self.request.user, order_copy=False)
         return form
 
 def upload_photos(request):
