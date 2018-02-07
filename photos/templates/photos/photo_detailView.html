@@ -36,7 +36,7 @@
                     <p>Public:{% if photoseries.public %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-close"></i>{% endif %}</p>
                     <a class="btn btn-primary btn-sm" role="button" href="{% url 'photos:update' photo.pk %}">Edit</a>
                     <a class="btn btn-danger btn-sm" role="button" href="{% url 'photos:delete' photo.pk %}">Delete</a>
-                    {% elif user.is_authenticated && photo.public %}
+                    {% elif user.is_authenticated and photo.public %}
                     <a class="btn btn-success btn-sm" role="button" href="{% url 'carts:add' %}?product=photo&id={{ photo.id }}">Buy</a>
                     {% endif %}
                 </div>
