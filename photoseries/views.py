@@ -62,7 +62,7 @@ def upload_photos(request):
         # iterate over files
         for count,a_file in enumerate(files):
             # create & save Image for every file
-            p_instance = Photo(image=a_file, owner=request.user, public = pub)
+            p_instance = Photo(title='Photoseries Photo', image=a_file, owner=request.user, public = pub)
             p_instance.save(True)
             # add image to series
             s_instance.images.add(p_instance)
@@ -117,4 +117,4 @@ class updatePhotoseries(LoginRequiredMixin, UpdateView):
 
 class deletePhotoseries(LoginRequiredMixin, OwnerRequiredView, DeleteView):
     model = Photoseries
-    success_url = '/photoseries/list/'
+    success_url = '/photoseries/owned/'

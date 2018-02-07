@@ -84,7 +84,7 @@ class updatePhoto(LoginRequiredMixin, OwnerRequiredView, UpdateView):
 
 class deletePhoto(LoginRequiredMixin, OwnerRequiredView, DeleteView):
     model = Photo
-    success_url = '/photos/view/'
+    success_url = '/photos/owned/'
 
     def get_context_data(self, **kwargs):
         context = super(deletePhoto, self).get_context_data(**kwargs)
